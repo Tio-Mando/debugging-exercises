@@ -1,0 +1,3 @@
+# Disable GitHub Copilot for the entire project to ensure students solve exercises manually
+**/*
+*
