@@ -172,7 +172,8 @@ This project is designed to be LLM-friendly. See [LLM_GUIDE.md](./LLM_GUIDE.md) 
 
 ## 📋 Current Exercises
 
-1. ✅ **01-calculator-error** - Logical error: Mathematical calculation bug (Beginner)
+1. ✅ **01-calculator-error** - Error Lógico: Bug en cálculo matemático (Principiante)
+2. ✅ **02-inventory-manager** - Error de Ejecución: Null references y validaciones faltantes (Intermedio)
 
 ### Coming Soon
 
