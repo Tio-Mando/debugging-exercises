@@ -183,6 +183,7 @@ This project is designed to be LLM-friendly. See [LLM_GUIDE.md](./LLM_GUIDE.md) 
 7. ✅ **07-api-integration** - Error Asíncrono: fetch y JSONPlaceholder (Avanzado)
 8. ✅ **08-hotel-booking-system** - Error Lógico: Lógica de negocio y reportes financieros (Avanzado)
 9. ✅ **09-ecommerce-cart-manager** - Error Lógico / Ejecución: Control de stock, fechas e impuestos (Intermedio)
+10. ✅ **10-subscription-billing** - Error Lógico: Prorrateo, reembolsos y descuentos en suscripciones SaaS (Intermedio)
 
 ### Coming Soon
 
