@@ -177,6 +177,7 @@ This project is designed to be LLM-friendly. See [LLM_GUIDE.md](./LLM_GUIDE.md) 
 1. ✅ **01-calculator-error** - Error Lógico: Bug en cálculo matemático (Principiante)
 2. ✅ **02-inventory-manager** - Error de Ejecución: Null references y validaciones faltantes (Intermedio)
 3. ✅ **03-async-user-auth** - Error Asíncrono: Promesas y fetch con API externa (Intermedio)
+4. ✅ **04-online-store-logic** - Error Lógico: Motor de tienda online con 7 funciones (Intermedio)
 
 ### Coming Soon
 
