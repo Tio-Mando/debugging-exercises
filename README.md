@@ -214,7 +214,8 @@ This project is designed to be LLM-friendly. See [LLM_GUIDE.md](./LLM_GUIDE.md) 
 38. ✅ **38-calendar-builder** - Error Lógico: `getDay()` sin conversión coloca lunes en índice 1 en vez de 0, desfasando toda la cuadrícula (Intermedio)
 39. ✅ **39-playlist-manager** - Error Lógico: Comparador numérico invertido (`b - a`) ordena canciones por duración y BPM de forma descendente en lugar de ascendente (Intermedio)
 40. ✅ **40-survey-analyzer** - Error Lógico: Percentil usa `n` en lugar de `n-1` como límite del índice, desplazando todos los valores y generando `undefined` en percentil 100 (Intermedio)
-41. ✅ **41-student-enrollment** - Error Lógico: Validación de prerequisitos usa `some` en lugar de `every`, permitiendo inscripción con prerequisitos incompletos (Intermedio) - Error Lógico: Percentil usa `n` en lugar de `n-1` como límite del índice, desplazando todos los valores y generando `undefined` en percentil 100 (Intermedio)
+41. ✅ **41-student-enrollment** - Error Lógico: Validación de prerequisitos usa `some` en lugar de `every`, permitiendo inscripción con prerequisitos incompletos (Intermedio)
+42. ✅ **42-scrabble-scorer** - Error Lógico: Multiplicador de palabra aplicado antes que los de letra invierte el orden de cálculo, dando puntajes incorrectos al combinar ambos (Intermedio) - Error Lógico: Validación de prerequisitos usa `some` en lugar de `every`, permitiendo inscripción con prerequisitos incompletos (Intermedio) - Error Lógico: Percentil usa `n` en lugar de `n-1` como límite del índice, desplazando todos los valores y generando `undefined` en percentil 100 (Intermedio)
 
 ## 🔧 Troubleshooting
 
