@@ -205,6 +205,7 @@ This project is designed to be LLM-friendly. See [LLM_GUIDE.md](./LLM_GUIDE.md) 
 29. ✅ **29-log-parser** - Error Lógico: Desestructuración de grupos de captura regex en orden incorrecto intercambia level y message (Intermedio)
 30. ✅ **30-email-extractor** - Error Lógico: Flag `i` ausente en el regex impide capturar emails con letras mayúsculas (Intermedio)
 31. ✅ **31-slug-generator** - Error Lógico: `toLowerCase()` aplicado después del filtro regex omite letras mayúsculas del slug (Intermedio)
+32. ✅ **32-roman-numeral-converter** - Error Lógico: Tabla de valores en orden ascendente impide que el algoritmo greedy aplique las reglas de sustracción (Intermedio)
 
 ## 🔧 Troubleshooting
 
