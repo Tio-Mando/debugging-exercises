@@ -208,6 +208,7 @@ This project is designed to be LLM-friendly. See [LLM_GUIDE.md](./LLM_GUIDE.md) 
 32. ✅ **32-roman-numeral-converter** - Error Lógico: Tabla de valores en orden ascendente impide que el algoritmo greedy aplique las reglas de sustracción (Intermedio)
 33. ✅ **33-run-length-encoder** - Error Lógico: Patrón `\d` en lugar de `\d+` en decode impide manejar conteos de dos o más dígitos (Intermedio)
 34. ✅ **34-vending-machine** - Error Lógico: Sort ascendente en lugar de descendente hace que el algoritmo greedy use demasiadas monedas pequeñas (Intermedio)
+35. ✅ **35-matrix-rotation** - Error Lógico: Invertir filas antes de transponer produce rotación antihoraria en lugar de horaria (Intermedio)
 
 ## 🔧 Troubleshooting
 
