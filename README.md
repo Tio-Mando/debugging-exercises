@@ -203,6 +203,7 @@ This project is designed to be LLM-friendly. See [LLM_GUIDE.md](./LLM_GUIDE.md) 
 27. ✅ **27-delivery-route** - Error Lógico: Distancia total de ruta omite el tramo de regreso al depósito (Intermedio) — Nominatim API
 28. ✅ **28-crypto-rebalancer** - Error Lógico: Plan de rebalanceo usa distribución equitativa ignorando los porcentajes objetivo (Intermedio) — CoinGecko API
 29. ✅ **29-log-parser** - Error Lógico: Desestructuración de grupos de captura regex en orden incorrecto intercambia level y message (Intermedio)
+30. ✅ **30-email-extractor** - Error Lógico: Flag `i` ausente en el regex impide capturar emails con letras mayúsculas (Intermedio)
 
 ## 🔧 Troubleshooting
 
