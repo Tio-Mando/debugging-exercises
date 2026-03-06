@@ -226,6 +226,7 @@ This project is designed to be LLM-friendly. See [LLM_GUIDE.md](./LLM_GUIDE.md) 
 50. ✅ **50-tax-calculator** - Error Lógico: Tasa impositiva de cada tramo se aplica al ingreso total en lugar de solo al monto dentro del tramo, produciendo impuestos inflados (Intermedio)
 51. ✅ **51-voting-system** - Error Lógico: `getWinner` usa `>= 0.5` en lugar de `> 0.5`, declarando ganador con exactamente el 50% de los votos en lugar de exigir mayoría absoluta estricta (Intermedio)
 52. ✅ **52-inventory-reorder** - Error Lógico: Punto de reorden usa `demanda × safetyStock + leadTime` en lugar de `demanda × leadTime + safetyStock`, intercambiando los operandos y produciendo valores incorrectos (Principiante)
+53. ✅ **53-discount-engine** - Error Lógico: `stackDiscounts` suma todas las tasas y aplica una sola vez al precio original en lugar de aplicar cada descuento secuencialmente sobre el precio resultante, sobreestimando el ahorro (Principiante)
 
 ## 🔧 Troubleshooting
 
