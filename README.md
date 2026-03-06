@@ -190,13 +190,18 @@ This project is designed to be LLM-friendly. See [LLM_GUIDE.md](./LLM_GUIDE.md) 
 14. ✅ **14-tournament-standings** - Error Lógico: Puntuación, registro de partidos y tabla de posiciones (Avanzado)
 15. ✅ **15-text-statistics** - Error Lógico: Conteo de palabras, promedio de longitud y frecuencia (Intermedio)
 16. ✅ **16-flight-booking-system** - Error de Ejecución: Accesos a propiedades undefined y división por cero en reservas de vuelos (Intermedio)
-
-### Coming Soon
-
-- More logical error exercises
-- Syntax error challenges
-- Runtime error scenarios
-- Async debugging practice
+17. ✅ **17-crypto-portfolio-tracker** - Error Lógico: Costo promedio por unidad dividido entre transacciones en lugar de unidades totales (Intermedio) — CoinGecko API
+18. ✅ **18-rideshare-pricing** - Error Lógico: Surge pricing aplicado solo a la tarifa base, no al total del viaje (Intermedio) — Nominatim API
+19. ✅ **19-university-grades** - Error Lógico: GPA calculado como promedio simple sin ponderar por créditos de cada materia (Intermedio) — JSONPlaceholder API
+20. ✅ **20-recipe-nutrition** - Error Lógico: Calorías por porción divididas entre ingredientes en lugar de porciones (Principiante) — Open Food Facts API
+21. ✅ **21-event-ticketing** - Error Lógico: Descuento de grupo usa `>` en vez de `>=`, excluyendo el mínimo exacto (Principiante) — JSONPlaceholder API
+22. ✅ **22-hr-payroll** - Error Lógico: Salario mensual calculado dividiendo entre 52 semanas en lugar de 12 meses (Principiante) — REST Countries API
+23. ✅ **23-gym-membership** - Error Lógico: Fecha de vencimiento suma días fijos en lugar de incrementar meses reales (Intermedio) — Open-Meteo API
+24. ✅ **24-social-analytics** - Error Lógico: Engagement rate dividido entre número de posts en lugar de seguidores (Principiante) — JSONPlaceholder API
+25. ✅ **25-book-recommender** - Error Lógico: Score de relevancia dividido entre temas del libro en lugar de intereses del usuario (Intermedio) — Open Library API
+26. ✅ **26-real-estate-evaluator** - Error Lógico: Mediana calculada sin ordenar el arreglo de precios primero (Principiante) — JSONPlaceholder API
+27. ✅ **27-delivery-route** - Error Lógico: Distancia total de ruta omite el tramo de regreso al depósito (Intermedio) — Nominatim API
+28. ✅ **28-crypto-rebalancer** - Error Lógico: Plan de rebalanceo usa distribución equitativa ignorando los porcentajes objetivo (Intermedio) — CoinGecko API
 
 ## 🔧 Troubleshooting
 
