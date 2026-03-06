@@ -146,26 +146,25 @@ Follow these steps when generating a new exercise:
 3.  Ensure the bug has clear symptoms
 4.  Make sure tests can catch the bug
 
-### Step 4: Create All Required Files
+### Step 4: Create All Required Files — TDD Order
 
 Generate all 4 files following the templates in this guide.
 
-**Order of creation**:
+**TDD order of creation** (mandatory):
 
-1.  `solution.js` (create correct code first)
-2.  `buggy-code.js` (introduce bug into correct code)
-3.  `test.js` (create Jest tests that fail with bug, pass with solution)
-4.  `README.md` (describe exercise in Scrum-style format, NO hints)
+1. `test.js` — write all Jest tests first, defining expected behavior (RED phase)
+2. `solution.js` — implement correct code until all tests pass (GREEN phase)
+3. `buggy-code.js` — copy solution and introduce the one intentional bug; run tests and confirm they now FAIL
+4. `README.md` — describe the exercise in Scrum-style format, NO hints
 
 ### Step 5: Test and Validate
 
 **Before considering the exercise complete**:
 
-1.  Verify buggy-code.js contains the intended bug
-2.  Run tests with buggy-code.js → should FAIL
-3.  Run tests with solution.js → should PASS
-4.  Check that README documentation is clear and complete
-5.  Verify README has NO hints section
+1. Run `npm test exercises/##-name` with `buggy-code.js` import → must FAIL
+2. Run `npm test exercises/##-name` with `solution.js` import → must PASS
+3. Check that README documentation is clear and complete
+4. Verify README has NO hints section
 
 ### Step 6: Update Main README
 
@@ -177,6 +176,17 @@ Add the new exercise to the main README.md in the "Current Exercises" section:
 1. ✅ **01-calculator-error** - Logical error: Mathematical calculation bug (Beginner)
 2. ✅ **02-your-new-exercise** - [Bug Type]: Brief description (Difficulty)
 ```
+
+### Step 7: Commit
+
+After all QA checks pass, commit the exercise:
+
+```bash
+git add exercises/##-name/ README.md
+git commit -m "feat :sparkles: add [name] exercise (##)"
+```
+
+One commit per exercise — no exceptions.
 
 ## File Creation Guidelines
 

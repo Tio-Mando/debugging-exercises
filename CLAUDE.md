@@ -34,13 +34,18 @@ Tests use Jest (`describe`/`test`/`expect`). The test file imports `buggy-code.j
 - **Code** (variable names, function names, logic): **English**
 - `solution.js` fix comments use the format: `// CORREGIDO: [explanation]`
 
-## Creating a New Exercise
+## Creating a New Exercise (TDD Workflow)
 
 1. Check existing exercises to determine the next sequential number
 2. Create folder `exercises/##-exercise-name/` (lowercase, hyphens)
-3. Create `solution.js` first (correct code), then `buggy-code.js` (introduce one bug), then `test.js` (fails with buggy, passes with solution), then `README.md`
+3. **TDD order** — create files in this sequence:
+   1. `test.js` first — define all expected behaviors (RED: tests will fail)
+   2. `solution.js` — correct implementation that makes all tests pass (GREEN)
+   3. `buggy-code.js` — copy of solution with one intentional bug introduced; verify tests now fail
+   4. `README.md` — Scrum-format description
 4. README format: `**Tipo**` tag → `## Historia de Usuario` → `## Criterios de Aceptación` → `## Problema Reportado` → `## Archivos` → `## Cómo Verificar` → `## Nivel de Dificultad`. **No hints section.**
 5. Add the exercise to the main `README.md` under `## 📋 Current Exercises`
+6. **Commit** the completed exercise with message: `feat :sparkles: add [name] exercise (##)`
 
 ## Bug Design Rules
 
@@ -61,3 +66,4 @@ Tests use Jest (`describe`/`test`/`expect`). The test file imports `buggy-code.j
 - README has no hints
 - All documentation in Spanish, all code in English
 - Main `README.md` updated with new exercise entry
+- One commit per exercise: `feat :sparkles: add [name] exercise (##)`

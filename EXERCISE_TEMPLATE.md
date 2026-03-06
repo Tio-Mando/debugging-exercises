@@ -329,7 +329,7 @@ Usa este checklist para asegurar completitud:
 - [ ] El nivel de dificultad es apropiado
 - [ ] **Idiomas correctos: español para docs, inglés para código**
 
-## Ejemplo de Inicio Rápido
+## Ejemplo de Inicio Rápido (flujo TDD)
 
 **Objetivo**: Crear un ejercicio simple de error lógico
 
@@ -338,33 +338,49 @@ Usa este checklist para asegurar completitud:
 3. **Tipo de Bug**: Error Lógico
 4. **Bug**: Función suma todos los números excepto el último (error off-by-one)
 
-```javascript
-// buggy-code.js
-function sumArray(numbers) {
-  let sum = 0;
-  for (let i = 0; i < numbers.length - 1; i++) {
-    // BUG: length - 1
-    sum += numbers[i];
-  }
-  return sum;
-}
+**Orden TDD obligatorio**:
 
-// solution.js
+**Paso 1 — `test.js` primero** (RED: los tests fallarán hasta que exista la solución):
+```javascript
+const { sumArray } = require('./buggy-code.js');
+describe('sumArray', () => {
+  test('suma todos los elementos del arreglo', () => {
+    expect(sumArray([1, 2, 3])).toBe(6);
+  });
+});
+```
+
+**Paso 2 — `solution.js`** (GREEN: hacer que los tests pasen):
+```javascript
 function sumArray(numbers) {
   let sum = 0;
   // CORREGIDO: Cambió < numbers.length - 1 a < numbers.length
-  // para incluir el último elemento en la suma
   for (let i = 0; i < numbers.length; i++) {
     sum += numbers[i];
   }
   return sum;
 }
+module.exports = { sumArray };
 ```
 
-4. **Crear pruebas** que esperan la suma completa
-5. **Escribir README** explicando que debería sumar todos los números (incluir tag de tipo de bug)
-6. **Escribir EXPLANATION** sobre errores off-by-one
-7. **Actualizar README.md principal** para listar el nuevo ejercicio
+**Paso 3 — `buggy-code.js`** (introducir el bug, verificar que los tests fallen):
+```javascript
+function sumArray(numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length - 1; i++) { // BUG: -1
+    sum += numbers[i];
+  }
+  return sum;
+}
+module.exports = { sumArray };
+```
+
+**Paso 4 — `README.md`**: describir en formato Scrum, sin pistas
+
+**Paso 5 — Actualizar `README.md` principal** y hacer commit:
+```bash
+git commit -m "feat :sparkles: add suma-calculadora-bug exercise (02)"
+```
 
 ## Tips para el Éxito
 

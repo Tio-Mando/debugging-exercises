@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm test:*)",
+      "Bash(sed s|buggy-code|solution|g:*)",
+      "Bash(cp:*)"
+    ]
+  }
+}
