@@ -234,6 +234,7 @@ This project is designed to be LLM-friendly. See [LLM_GUIDE.md](./LLM_GUIDE.md) 
 58. ✅ **58-event-calendar** - Error Lógico: `generateRecurringDates` empieza el bucle en `i = 1` en lugar de `i = 0`, omitiendo la fecha de inicio y desplazando todas las ocurrencias un intervalo hacia adelante (Principiante)
 59. ✅ **59-luhn-validator** - Error Lógico: Bug en el algoritmo de Luhn (Avanzado)
 60. ✅ **60-morse-code-translator** - Múltiples Errores: Defectos distribuidos a lo largo de todas las funciones del módulo de traducción Morse (Avanzado)
+61. ✅ **61-investment-calculator** - Error Lógico: Bug en fórmula financiera que afecta ROI, ranking y filtrado de inversiones (Avanzado)
 
 ## 🔧 Troubleshooting
 
