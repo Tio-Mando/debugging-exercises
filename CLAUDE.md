@@ -53,6 +53,7 @@ Tests use Jest (`describe`/`test`/`expect`). The test file imports `buggy-code.j
 - Realistic (something a developer might actually write)
 - Not trivially obvious, not obscure
 - Bug types: Logical Error, Runtime Error, Async Error, Syntax Error
+- **No spoilers in `buggy-code.js`**: no comments that reveal, describe, or hint at the bug (e.g. `// Bug:`, `// wrong`, `// Con el bug:`, `// Operandos intercambiados`, or any comment explaining what the mistake is). Students must find the error themselves. Comments that describe normal logic are fine; comments that explain why the code is wrong are not.
 
 ## Exercise Numbering
 
@@ -64,6 +65,7 @@ Tests use Jest (`describe`/`test`/`expect`). The test file imports `buggy-code.j
 
 - Tests **fail** with `buggy-code.js`, **pass** with `solution.js`
 - README has no hints
+- `buggy-code.js` has no comments that describe or point to the bug
 - All documentation in Spanish, all code in English
 - Main `README.md` updated with new exercise entry
 - One commit per exercise: `feat :sparkles: add [name] exercise (##)`

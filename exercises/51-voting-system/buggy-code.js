@@ -17,7 +17,6 @@ function getWinner(ballots) {
   if (ballots.length === 0) return null;
   const tally = tallyVotes(ballots);
   const total = ballots.length;
-  // Usa >= 0.5 en lugar de > 0.5, declarando ganador con exactamente el 50%
   const winner = Object.entries(tally).find(([, votes]) => votes / total >= 0.5);
   return winner ? winner[0] : null;
 }
@@ -63,8 +62,3 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = { tallyVotes, getWinner, getRankedResults, eliminateLowest, instantRunoff };
 }
 
-if (require.main === module) {
-  // Con exactamente 50% cada uno, el bug declara ganador al primero encontrado
-  const ballots = ['Alice', 'Alice', 'Bob', 'Bob'];
-  console.log('Winner (wrong):', getWinner(ballots));
-}

@@ -65,8 +65,6 @@ class LibrarySystem {
     return loan;
   }
 
-  // Signo invertido: calcula (dueDate - returnDate) en lugar de (returnDate - dueDate).
-  // Devolver tarde produce días negativos → multa 0; devolver antes produce multa incorrecta.
   calculateFine(dueDate, returnDate) {
     const due = new Date(dueDate);
     const returned = new Date(returnDate);
@@ -179,13 +177,3 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = { LibrarySystem };
 }
 
-if (require.main === module) {
-  const lib = new LibrarySystem({ dailyFineRate: 0.5 });
-  lib.addBook({ id: 'B001', title: 'Clean Code', author: 'R. Martin', copies: 2 });
-  lib.addMember({ id: 'M001', name: 'Alice' });
-
-  const loan = lib.checkout('M001', 'B001', '2024-03-10');
-  const result = lib.returnBook(loan.id, '2024-03-15'); // 5 days late
-  // Con el bug: due - returned = 10 - 15 = -5 → Math.max(0, -5) = 0 → multa = $0 (incorrecto)
-  console.log('Fine (wrong):', result.fine);
-}

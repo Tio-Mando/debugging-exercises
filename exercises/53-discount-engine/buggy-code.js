@@ -13,8 +13,6 @@ function applyFlatDiscount(price, amount) {
   return Math.max(0, Math.round((price - amount) * 100) / 100);
 }
 
-// Suma todas las tasas y aplica el total de una sola vez al precio original,
-// en lugar de aplicar cada descuento secuencialmente sobre el precio resultante.
 function stackDiscounts(price, discountRates) {
   const totalRate = discountRates.reduce((sum, rate) => sum + rate, 0);
   return applyPercentageDiscount(price, totalRate);
@@ -170,8 +168,3 @@ if (typeof module !== 'undefined' && module.exports) {
   };
 }
 
-if (require.main === module) {
-  // Con el bug: totalRate = 0.1 + 0.2 = 0.3 → 100 * 0.7 = 70 (incorrecto)
-  // Correcto: 100 → 90 → 72
-  console.log('Stack [10%, 20%] on $100 (wrong):', stackDiscounts(100, [0.1, 0.2]));
-}

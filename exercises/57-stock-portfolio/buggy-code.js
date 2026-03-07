@@ -81,8 +81,6 @@ class StockPortfolio {
     return Math.round(((currentValue - costBasis) / costBasis) * 10000) / 10000;
   }
 
-  // Promedio simple: totalReturn / years en lugar de la fórmula CAGR compuesta.
-  // Para retornos positivos a largo plazo esto sobreestima el retorno anual.
   getAnnualizedReturn(totalReturn, years) {
     if (years <= 0) throw new Error('Years must be positive');
     return Math.round((totalReturn / years) * 100000) / 100000;
@@ -176,12 +174,3 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = { StockPortfolio };
 }
 
-if (require.main === module) {
-  const p = new StockPortfolio();
-  p.addPosition('AAPL', 10, 100, '2022-01-01');
-
-  // Retorno total 100% en 2 años
-  // Con el bug: 1.0 / 2 = 0.5 (50% anual, incorrecto)
-  // Correcto: (1+1.0)^(1/2) - 1 = sqrt(2) - 1 ≈ 0.4142
-  console.log('Annualized (wrong):', p.getAnnualizedReturn(1.0, 2));
-}

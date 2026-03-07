@@ -13,9 +13,6 @@ function tokenize(text, stopwords = []) {
     .filter(word => word.length > 0 && !stopwords.includes(word));
 }
 
-// Divide entre el número de palabras únicas en lugar del total de palabras.
-// Cuando hay palabras repetidas, el denominador es menor y los TF quedan
-// inflados, además la suma de todos los TF ya no es igual a 1.
 function termFrequency(text) {
   const tokens = tokenize(text);
   if (tokens.length === 0) return {};
@@ -162,11 +159,3 @@ if (typeof module !== 'undefined' && module.exports) {
   };
 }
 
-if (require.main === module) {
-  const doc1 = 'the cat sat on the mat';
-  // Con el bug: "the" aparece 2 veces, 5 palabras únicas → TF = 2/5 = 0.4
-  // Correcto: 6 palabras totales → TF = 2/6 = 0.333
-  const tf = termFrequency(doc1);
-  console.log('TF("the") (wrong):', tf['the']); // 0.4
-  console.log('Sum of TF (wrong):', Object.values(tf).reduce((s, v) => s + v, 0)); // 1.2 ≠ 1
-}
