@@ -1,178 +1,168 @@
-# 🐛 JavaScript Debugging Exercises
+# 🐛 Ejercicios de Debugging en JavaScript
 
-A comprehensive collection of hands-on debugging exercises designed to teach JavaScript debugging skills through practical experience. Each exercise contains intentional bugs that you must identify, understand, and fix.
+Una colección completa de ejercicios prácticos de depuración diseñados para enseñar habilidades de debugging en JavaScript a través de la experiencia directa. Cada ejercicio contiene bugs intencionales que debes identificar, entender y corregir.
 
-## 🎯 Purpose
+## 🎯 Propósito
 
-This project helps developers:
+Este proyecto ayuda a los desarrolladores a:
 
-- **Master debugging techniques** through real-world scenarios
-- **Build problem-solving skills** by identifying and fixing bugs
-- **Understand common pitfalls** in JavaScript development
-- **Develop best practices** to write bug-free code
+- **Dominar técnicas de depuración** a través de escenarios del mundo real
+- **Desarrollar habilidades de resolución de problemas** identificando y corrigiendo bugs
+- **Entender los errores comunes** en el desarrollo con JavaScript
+- **Adoptar buenas prácticas** para escribir código libre de bugs
 
-## 🚀 Getting Started
+## 🚀 Primeros Pasos
 
-### Prerequisites
+### Prerrequisitos
 
-- Node.js 14.x or higher
-- Basic JavaScript knowledge
-- A text editor or IDE
+- Node.js 14.x o superior
+- Conocimientos básicos de JavaScript
+- Un editor de texto o IDE
 
-### Installation
+### Instalación
 
 ```bash
-# Clone the repository
+# Clonar el repositorio
 git clone <repository-url>
 
-# Navigate to project directory
+# Navegar al directorio del proyecto
 cd debugging-exercises
 
-# No dependencies to install - uses vanilla JavaScript!
+# Instalar dependencias (Jest)
+npm install
 ```
 
-### How to Use
+### Cómo Usar
 
-1. **Choose an exercise** from the `exercises/` directory
-2. **Read the README** in the exercise folder to understand the context
-3. **Examinar buggy-code.js** - este contiene el código roto
-4. **Ejecutar las pruebas** para ver qué falla:
+1. **Elige un ejercicio** del directorio `exercises/`
+2. **Lee el README** de la carpeta del ejercicio para entender el contexto
+3. **Examina `buggy-code.js`** — contiene el código roto que debes depurar
+4. **Ejecuta las pruebas** para ver qué falla:
    ```bash
    npm test exercises/01-calculator-error
    ```
-5. **Depurar y corregir** el código
-6. **Run tests again** to verify your solution
-7. **Compare with solution.js** to deepen understanding
+5. **Depura y corrige** el código en `buggy-code.js`
+6. **Vuelve a ejecutar las pruebas** para verificar tu solución
+7. **Compara con `solution.js`** para profundizar tu comprensión
 
-## 📁 Project Structure
+## 📁 Estructura del Proyecto
 
 ```
 debugging-exercises/
 ├── exercises/
-│   ├── 01-calculator-error/    # Individual exercise
-│   ├── 02-[next-exercise]/     # Future exercises
+│   ├── 01-calculator-error/    # Ejercicio individual
+│   ├── 02-[siguiente]/         # Más ejercicios
 │   └── ...
-├── base-prompt.md              # Complete project context
-├── STRUCTURE.md                # Detailed structure explanation
-├── LLM_GUIDE.md                # Guide for LLMs to create exercises
-├── EXERCISE_TEMPLATE.md        # Template for new exercises
-└── README.md                   # This file
+├── CLAUDE.md                   # Instrucciones para agentes IA
+├── TESTING.md                  # Guía de testing con Jest
+├── EXERCISE_TEMPLATE.md        # Plantilla para crear nuevos ejercicios
+└── README.md                   # Este archivo
 ```
 
-See [STRUCTURE.md](./STRUCTURE.md) for detailed information about the folder organization.
+## 🏷️ Tipos de Ejercicios
 
-## 🏷️ Exercise Types
+Los ejercicios están etiquetados según el tipo de bug que contienen:
 
-Exercises are tagged by the type of bug they contain:
+### 💭 Errores Lógicos
 
-### 💭 Logical Errors
+El código se ejecuta sin errores pero produce resultados incorrectos.
 
-Code runs without errors but produces incorrect results.
+- Errores de límites (off-by-one)
+- Operadores incorrectos
+- Lógica condicional defectuosa
+- Errores de cálculo matemático
 
-- Off-by-one errors
-- Wrong operators
-- Flawed conditional logic
-- Calculation mistakes
+**Ejemplo**: [01-calculator-error](./exercises/01-calculator-error/)
 
-**Example**: [01-calculator-error](./exercises/01-calculator-error/)
+### 📝 Errores de Sintaxis
 
-### 📝 Syntax Errors
+El código no puede parsearse debido a sintaxis incorrecta.
 
-Code fails to parse due to incorrect syntax.
+- Llaves o paréntesis faltantes
+- Declaraciones inválidas
+- Puntuación mal colocada
 
-- Missing brackets/parentheses
-- Invalid declarations
-- Misplaced punctuation
+### ⚠️ Errores de Ejecución
 
-### ⚠️ Runtime Errors
+Errores que ocurren durante la ejecución del código.
 
-Errors that occur during code execution.
+- Referencias nulas o indefinidas
+- Errores de tipo
+- Operaciones inválidas
 
-- Null/undefined references
-- Type errors
-- Invalid operations
+### ⏱️ Errores Asíncronos
 
-### ⏱️ Async Errors
+Problemas específicos del código asíncrono.
 
-Issues specific to asynchronous code.
+- Problemas con el manejo de Promesas
+- Errores con callbacks
+- Condiciones de carrera
 
-- Promise handling problems
-- Callback mistakes
-- Race conditions
+**Ejemplo**: [03-async-user-auth](./exercises/03-async-user-auth/)
 
-**Example**: [03-async-user-auth](./exercises/03-async-user-auth/)
+## 📚 Estructura de Cada Ejercicio
 
-## 📚 Exercise Structure
+Cada ejercicio contiene exactamente **4 archivos**:
 
-Each exercise contains:
+| Archivo          | Propósito                                                                                          |
+| ---------------- | -------------------------------------------------------------------------------------------------- |
+| `README.md`      | Descripción en formato Scrum: Historia de Usuario, Criterios de Aceptación y Problema Reportado    |
+| `buggy-code.js`  | El código roto que debes depurar                                                                   |
+| `solution.js`    | La solución de referencia con comentarios explicativos (para comparar después de resolver)         |
+| `test.js`        | Pruebas automatizadas Jest para validar tu solución                                                |
 
-| File             | Purpose                                     |
-| ---------------- | ------------------------------------------- |
-| `README.md`      | Exercise description, objectives, and hints |
-| `buggy-code.js`  | The broken code to debug                    |
-| `solution.js`    | Corrected code with explanations            |
-| `EXPLANATION.md` | Deep dive into the bug and how to fix it    |
-| `test.js`        | Automated tests for validation              |
+## 🎓 Ruta de Aprendizaje
 
-## 🎓 Learning Path
+Los ejercicios están numerados en el orden de progresión recomendado:
 
-Exercises are numbered in recommended order of progression:
+1. Comienza con **01-calculator-error** (error lógico, nivel principiante)
+2. Avanza por los ejercicios secuencialmente
+3. Cada ejercicio desarrolla habilidades de depuración de forma progresiva
+4. Consulta el README de cada ejercicio para ver el nivel de dificultad
 
-1. Start with **01-calculator-error** (logical error, beginner-friendly)
-2. Progress through exercises sequentially
-3. Each exercise builds debugging skills progressively
-4. Check the README of each exercise for difficulty level
+## 🧪 Ejecutar las Pruebas
 
-## 🧪 Running Tests
-
-Each exercise includes tests to validate your solution:
+Cada ejercicio incluye pruebas Jest para validar tu solución:
 
 ```bash
-# Run a specific exercise test
-node exercises/01-calculator-error/test.js
+# Ejecutar las pruebas de un ejercicio específico
+npm test exercises/01-calculator-error
 
-# The test will show:
-# ✓ Passed tests (green)
-# ✗ Failed tests (red with details)
+# Las pruebas mostrarán:
+# ✓ Tests que pasan (verde)
+# ✗ Tests que fallan (rojo con detalles)
 ```
 
-## 🤝 Contributing
+Consulta [TESTING.md](./TESTING.md) para una guía completa sobre cómo interpretar los resultados y usar Jest.
 
-Want to add new exercises? Great! Follow these steps:
+## 🤝 Contribuir
 
-1. Read [LLM_GUIDE.md](./LLM_GUIDE.md) or [EXERCISE_TEMPLATE.md](./EXERCISE_TEMPLATE.md)
-2. Create your exercise following the standard structure
-3. Ensure tests validate the solution
-4. Document thoroughly
-5. Submit a pull request
+¿Quieres agregar nuevos ejercicios? Sigue estos pasos:
 
-## 📖 For Educators
+1. Lee `EXERCISE_TEMPLATE.md` para la estructura estándar
+2. Crea tu ejercicio siguiendo el flujo TDD obligatorio
+3. Asegúrate de que las pruebas fallen con `buggy-code.js` y pasen con `solution.js`
+4. Documenta el ejercicio completamente en español
+5. Envía un pull request
 
-This project is perfect for:
+## 📖 Para Educadores
 
-- **Classroom instruction** - Assign exercises as homework or lab work
-- **Coding bootcamps** - Build debugging skills early
-- **Self-study** - Students can learn independently
-- **Interview prep** - Practice finding bugs under pressure
+Este proyecto es ideal para:
 
-## 🤖 For LLMs
+- **Instrucción en clase** — asigna ejercicios como tarea o práctica de laboratorio
+- **Bootcamps de programación** — desarrolla habilidades de depuración desde el inicio
+- **Estudio independiente** — los estudiantes pueden aprender de forma autónoma
+- **Preparación para entrevistas** — practica encontrar bugs bajo presión
 
-This project is designed to be LLM-friendly. See [LLM_GUIDE.md](./LLM_GUIDE.md) for detailed instructions on:
+## 💡 Consejos para el Éxito
 
-- Generating new exercises
-- Maintaining project consistency
-- Following quality standards
-- Creating appropriate difficulty levels
+1. **No vayas directo a la solución** — practica las técnicas de depuración
+2. **Usa `console.log()`** — rastrea valores intermedios en el código
+3. **Lee los mensajes de error con atención** — suelen apuntar al problema
+4. **Formula hipótesis** — adivina qué está mal y luego pruébalo
+5. **Aprende de las soluciones** — entiende el *por qué* detrás de cada bug
 
-## 💡 Tips for Success
-
-1. **Don't rush to the solution** - Practice debugging techniques
-2. **Use console.log()** - Track values through the code
-3. **Read error messages carefully** - They often point to the problem
-4. **Form hypotheses** - Guess what's wrong, then test it
-5. **Learn from explanations** - Understand the "why" behind bugs
-
-## 📋 Current Exercises
+## 📋 Ejercicios Disponibles
 
 1. ✅ **01-calculator-error** - Error Lógico: Bug en cálculo matemático (Principiante)
 2. ✅ **02-inventory-manager** - Error de Ejecución: Null references y validaciones faltantes (Intermedio)
@@ -232,16 +222,23 @@ This project is designed to be LLM-friendly. See [LLM_GUIDE.md](./LLM_GUIDE.md) 
 56. ✅ **56-library-fines** - Error Lógico: `calculateFine` calcula `dueDate - returnDate` en lugar de `returnDate - dueDate`, invirtiendo el signo y cobrando $0 por devoluciones tardías (Principiante)
 57. ✅ **57-stock-portfolio** - Error Lógico: `getAnnualizedReturn` usa `totalReturn / years` (promedio simple) en lugar de la fórmula CAGR compuesta `(1+r)^(1/n) - 1`, sobreestimando el retorno anual (Intermedio)
 58. ✅ **58-event-calendar** - Error Lógico: `generateRecurringDates` empieza el bucle en `i = 1` en lugar de `i = 0`, omitiendo la fecha de inicio y desplazando todas las ocurrencias un intervalo hacia adelante (Principiante)
+59. ✅ **59-luhn-validator** - Error Lógico: Bug en el algoritmo de Luhn (Avanzado)
+60. ✅ **60-morse-code-translator** - Múltiples Errores: Defectos distribuidos a lo largo de todas las funciones del módulo de traducción Morse (Avanzado)
+61. ✅ **61-investment-calculator** - Error Lógico: Bug en fórmula financiera que afecta ROI, ranking y filtrado de inversiones (Avanzado)
+62. ✅ **62-contact-book** - Error de Tipo de Retorno: Bug en búsqueda por teléfono que devuelve un tipo incorrecto y afecta múltiples operaciones (Intermedio)
+66. ✅ **66-expense-splitter** - Error Lógico: Bug en el cálculo de lo que debe cada participante provoca balances incorrectos en cadena (Intermedio)
+68. ✅ **68-anagram-finder** - Error Lógico: `filterWordsWithMinAnagrams` usa `>` en lugar de `>=` al comparar el umbral, excluyendo palabras con exactamente el mínimo requerido de anagramas (Intermedio)
+69. ✅ **69-matrix-stats** - Error Lógico: `colSums` usa `row[0]` en lugar de `row[col]`, produciendo la misma suma para todas las columnas (Intermedio)
 
-## 🔧 Troubleshooting
+## 🔧 Solución de Problemas
 
-### Tests won't run
+### Las pruebas no ejecutan
 
-- Ensure Node.js is installed: `node --version`
-- Navigate to the correct directory
-- Check file paths are correct
+- Verifica que Node.js esté instalado: `node --version`
+- Instala las dependencias: `npm install`
+- Asegúrate de estar en el directorio correcto
 
-### Can't find the bug
+### No puedo encontrar el bug
 
 - Re-lee la sección **Problema Reportado** del README del ejercicio
 - Agrega `console.log()` para rastrear valores intermedios
@@ -249,16 +246,16 @@ This project is designed to be LLM-friendly. See [LLM_GUIDE.md](./LLM_GUIDE.md) 
 - Ejecuta el archivo con `node buggy-code.js` para ver el comportamiento en aislado
 - Compara línea a línea el código con los criterios de aceptación del README
 
-## 📄 License
+## 📄 Licencia
 
-This project is open source and available for educational purposes.
+Este proyecto es de código abierto y está disponible para uso educativo.
 
-## 🙏 Acknowledgments
+## 🙏 Agradecimientos
 
-Created to help developers build essential debugging skills through practical, hands-on experience.
+Creado para ayudar a los desarrolladores a construir habilidades esenciales de depuración a través de experiencia práctica.
 
 ---
 
-**Happy Debugging! 🐛➡️✨**
+**¡Feliz Debugging! 🐛➡️✨**
 
-Remember: Every bug you fix makes you a better developer!
+Recuerda: cada bug que corriges te hace un mejor desarrollador.

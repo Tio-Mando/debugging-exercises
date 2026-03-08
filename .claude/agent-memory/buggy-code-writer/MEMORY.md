@@ -3,6 +3,7 @@
 ## Bug Patterns Used (avoid repeating in same concept area)
 
 - **ex-59 (luhn-validator)**: Logical error — `positionFromRight % 2 === 0` instead of `=== 1` in Luhn algorithm. Duplicates digits at wrong positions (even instead of odd from right), breaking all valid card number checks.
+- **ex-61 (investment-calculator)**: Logical error — `(growthFactor + 1) / rate` instead of `(growthFactor - 1) / rate` in annuity factor formula inside `futureValue`. Addition vs subtraction typo; breaks all tests that call `futureValue` with a non-zero rate and periodic payments.
 
 ## General Patterns
 

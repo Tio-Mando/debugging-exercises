@@ -65,8 +65,6 @@ class EventCalendar {
     });
   }
 
-  // El bucle comienza en i = 1 en lugar de i = 0, omitiendo la fecha de inicio
-  // y desplazando todas las ocurrencias un intervalo hacia adelante.
   generateRecurringDates(startDate, intervalDays, count) {
     const dates = [];
     for (let i = 1; i <= count; i++) {
@@ -183,10 +181,3 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = { EventCalendar };
 }
 
-if (require.main === module) {
-  const cal = new EventCalendar();
-  // Con el bug: i=1, i=2, i=3 → days 7, 14, 21 → ['2024-03-08', '2024-03-15', '2024-03-22']
-  // Correcto: ['2024-03-01', '2024-03-08', '2024-03-15']
-  const dates = cal.generateRecurringDates('2024-03-01', 7, 3);
-  console.log('Recurring dates (wrong):', dates);
-}

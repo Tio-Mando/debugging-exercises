@@ -27,8 +27,6 @@ class Leaderboard {
     return [...this.scores.get(playerId)];
   }
 
-  // Retorna el primer puntaje enviado en lugar del máximo,
-  // ignorando cualquier mejora posterior del jugador.
   getPlayerBest(playerId) {
     if (!this.scores.has(playerId)) {
       throw new Error(`Player ${playerId} not found`);
@@ -161,14 +159,3 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = { Leaderboard };
 }
 
-if (require.main === module) {
-  const board = new Leaderboard();
-  board.addScore('Alice', 50);
-  board.addScore('Alice', 90); // se ignora con el bug
-  board.addScore('Bob', 80);
-
-  // Con el bug: Alice aparece con 50, Bob con 80 → Bob gana
-  // Correcto: Alice tiene 90 → Alice gana
-  console.log('Alice best (wrong):', board.getPlayerBest('Alice'));
-  console.log('Ranking (wrong):', board.getRanking());
-}

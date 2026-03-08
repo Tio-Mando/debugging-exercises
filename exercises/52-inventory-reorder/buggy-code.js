@@ -66,8 +66,6 @@ class Inventory {
     return item.currentStock;
   }
 
-  // Operandos intercambiados: usa avgDailyDemand * safetyStock + leadTimeDays
-  // en lugar de avgDailyDemand * leadTimeDays + safetyStock
   calculateReorderPoint(id) {
     const item = this.getItem(id);
     return item.avgDailyDemand * item.safetyStock + item.leadTimeDays;
@@ -208,13 +206,3 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = { Inventory, InventoryItem };
 }
 
-if (require.main === module) {
-  const inv = new Inventory();
-  inv.addItem({
-    id: 'A001', name: 'Widget Alpha', avgDailyDemand: 10,
-    leadTimeDays: 5, safetyStock: 20, currentStock: 100,
-    orderCost: 50, holdingCostPerUnit: 2, annualDemand: 3650,
-  });
-  // Con el bug: 10 * 20 + 5 = 205 (incorrecto), debería ser 10 * 5 + 20 = 70
-  console.log('Reorder point (wrong):', inv.calculateReorderPoint('A001'));
-}

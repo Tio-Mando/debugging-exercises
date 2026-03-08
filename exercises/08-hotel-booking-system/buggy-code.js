@@ -22,9 +22,8 @@ const HOTEL_CONFIG = {
  * Determina la temporada según el mes del año.
  */
 function getSeason(date) {
-  const month = date.getMonth(); 
-  // Bug de lógica: Octubre (9) y Noviembre (10) no están definidos, devuelve undefined
-  if (month >= 5 && month <= 8) return 'summer'; 
+  const month = date.getMonth();
+  if (month >= 5 && month <= 8) return 'summer';
   if (month === 11 || month === 0 || month === 1) return 'winter';
 }
 
@@ -33,8 +32,6 @@ function getSeason(date) {
  */
 function validateDateRange(checkIn, checkOut) {
   const now = new Date();
-  // Bug: No se resetean las horas, lo que causa fallos aleatorios según la hora del día
-  
   const inDate = new Date(checkIn);
   const outDate = new Date(checkOut);
   
@@ -42,7 +39,6 @@ function validateDateRange(checkIn, checkOut) {
     throw new Error('La fecha de check-in no puede ser en el pasado');
   }
   
-  // Bug de lógica: permite check-out igual al check-in
   if (outDate < inDate) {
     throw new Error('La fecha de check-out debe ser posterior al check-in');
   }
@@ -59,21 +55,17 @@ function calculateStayPrice(checkIn, checkOut, roomType = 'standard') {
   const inDate = new Date(checkIn);
   const outDate = new Date(checkOut);
   
-  // Bug: Cálculo de noches incorrecto (usando / 1000 * 60 * 60 * 12 en lugar de 24)
   const diffTime = Math.abs(outDate - inDate);
   const nights = Math.ceil(diffTime / (1000 * 60 * 60 * 12));
   
   let totalBase = 0;
   
-  // Bug: Siempre aplica el multiplicador del día de entrada a toda la estancia
   const season = getSeason(inDate);
   const multiplier = HOTEL_CONFIG.seasonalMultipliers[season]; 
   const roomMultiplier = roomType === 'suite' ? 2 : 1;
   
   totalBase = (HOTEL_CONFIG.basePrice * multiplier * roomMultiplier) * nights;
-  
-  // Bug de ejecución: Si season es undefined, multiplier es undefined, totalBase es NaN
-  
+
   const tax = totalBase * HOTEL_CONFIG.taxRate;
   return {
     subtotal: totalBase,
@@ -99,7 +91,6 @@ function processBookingBatch(existingReservations, newBookings) {
   const allReservations = [...existingReservations];
 
   for (const booking of newBookings) {
-    // Bug de sintaxis: falta el 'try' antes del bloque
     {
       const priceDetails = calculateStayPrice(booking.checkIn, booking.checkOut, booking.roomType);
       
@@ -120,7 +111,6 @@ function processBookingBatch(existingReservations, newBookings) {
     }
   }
 
-  // Bug: Riesgo de división por cero si successful está vacío
   const totalNights = results.successful.reduce((acc, b) => acc + b.nights, 0);
   results.occupancyStats.averageNights = totalNights / results.successful.length;
 
@@ -131,19 +121,17 @@ function processBookingBatch(existingReservations, newBookings) {
  * Genera un reporte de ingresos mensuales.
  */
 function generateRevenueReport(reservations, year) {
-  const report = {}; // Bug: Debería ser un array para map/sort posterior
+  const report = {};
 
   for (const res of reservations) {
     const date = new Date(res.checkIn);
     if (date.getFullYear() === year) {
       const monthIndex = date.getMonth() + 1;
-      // Bug: No inicializa el mes, causa NaN al sumar
       report[monthIndex].revenue += res.total;
       report[monthIndex].bookingsCount += 1;
     }
   }
 
-  // Bug: Intentar ordenar un objeto como si fuera un array
   return report.sort((a, b) => b.revenue - a.revenue);
 }
 
