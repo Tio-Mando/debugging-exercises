@@ -51,7 +51,7 @@ const calculator = {
     }
 
     // Calcular y retornar el promedio
-    return sum + numbers[numbers.length - 1] / numbers.length;
+    return sum / numbers.length;
   },
 };
 
