@@ -225,6 +225,10 @@ Este proyecto es ideal para:
 59. ✅ **59-luhn-validator** - Error Lógico: Bug en el algoritmo de Luhn (Avanzado)
 60. ✅ **60-morse-code-translator** - Múltiples Errores: Defectos distribuidos a lo largo de todas las funciones del módulo de traducción Morse (Avanzado)
 61. ✅ **61-investment-calculator** - Error Lógico: Bug en fórmula financiera que afecta ROI, ranking y filtrado de inversiones (Avanzado)
+62. ✅ **62-contact-book** - Error de Tipo de Retorno: Bug en búsqueda por teléfono que devuelve un tipo incorrecto y afecta múltiples operaciones (Intermedio)
+66. ✅ **66-expense-splitter** - Error Lógico: Bug en el cálculo de lo que debe cada participante provoca balances incorrectos en cadena (Intermedio)
+68. ✅ **68-anagram-finder** - Error Lógico: `filterWordsWithMinAnagrams` usa `>` en lugar de `>=` al comparar el umbral, excluyendo palabras con exactamente el mínimo requerido de anagramas (Intermedio)
+69. ✅ **69-matrix-stats** - Error Lógico: `colSums` usa `row[0]` en lugar de `row[col]`, produciendo la misma suma para todas las columnas (Intermedio)
 
 ## 🔧 Solución de Problemas
 
