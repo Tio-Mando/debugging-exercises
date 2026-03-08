@@ -43,8 +43,11 @@ function addProduct(inventory, product) {
  */
 function getProductPrice(inventory, productId) {
   // Buscar el producto en el inventario y retornar su precio
+
+  if (!(Array.isArray(inventory))) throw new Error('El inventario debe ser un array')
   const product = inventory.find((item) => item.id === productId);
-  return product.price;
+  if (product !== undefined) return product.price;
+  throw new Error(`Producto con ID ${productId} no encontrado en el inventario`)
 }
 
 /**
@@ -61,10 +64,10 @@ function applyDiscount(price, discount) {
     throw new Error('El precio debe ser un número positivo');
   }
   // Aplicar el descuento al precio original
-  if (typeof discount !== 'number' || discount < 0) {
+  if (typeof discount !== 'number' || discount < 0 || discount > 1) {
     throw new Error('El descuento debe ser un número entre 0 y 1');
   }
-  return price * (1 - discount);
+  return price - (price * (discount));
 }
 
 /**
@@ -74,12 +77,16 @@ function applyDiscount(price, discount) {
  * @returns {number} Valor total del inventario
  */
 function getTotalValue(inventory) {
+  if (!(Array.isArray(inventory))) throw new Error('El inventario debe ser un array')
   // Calcular el valor total sumando precio × cantidad de cada producto
+
+  const validation = [null, undefined]
+  if (validation.includes(inventory)) throw new Error('el inventario no puede ser un null o undefined')
   if (inventory.length === 0) {
     return 0;
   }
   return inventory.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total, item) => total + (item.price * item.quantity),
     0,
   );
 }
@@ -113,4 +120,5 @@ if (require.main === module) {
   console.log('Precio Laptop:', getProductPrice(inventory, 1));
   console.log('Precio Mouse con 20% descuento:', applyDiscount(25, 0.2));
   console.log('Valor total del inventario:', getTotalValue(inventory));
+  console.log(inventory)
 }
