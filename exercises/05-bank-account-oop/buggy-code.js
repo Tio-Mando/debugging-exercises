@@ -1,4 +1,4 @@
-/**
+4/**
  * Sistema bancario orientado a objetos.
  *
  * Modela cuentas bancarias con historial de transacciones, transferencias
@@ -32,7 +32,8 @@ class Transaction {
    */
   getNetEffect() {
     // Los retiros y depósitos tienen el mismo impacto positivo en el saldo
-    return this.amount;
+    if (this.type === 'deposit') return this.amount;
+    else return this.amount * -1
   }
 
   toString() {
@@ -59,13 +60,14 @@ class BankAccount {
     }
 
     this.owner = owner;
-    this._balance = initialBalance;
-    this._transactions = [];
+    this.balance = initialBalance;
+    this.transactions = [];
+    this.initialBalance = initialBalance
   }
 
   /** @returns {number} Saldo actual */
-  get balance() {
-    return this._balance;
+  balance() {
+    return this.balance;
   }
 
   /**
@@ -75,13 +77,14 @@ class BankAccount {
    * @returns {number} Nuevo saldo
    */
   deposit(amount, description = 'Depósito') {
+    // if(description !== 'Depósito') throw new Error('description no es un deposito')
     if (typeof amount !== 'number' || amount <= 0) {
       throw new Error('El monto del depósito debe ser un número positivo');
     }
     // Actualizar el saldo sumando el monto al balance actual
-    this._balance -= amount;
-    this._transactions.push(new Transaction('deposit', amount, description));
-    return this._balance;
+    this.balance += amount;
+    this.transactions.push(new Transaction('deposit', amount, description));
+    return this.balance;
   }
 
   /**
@@ -91,16 +94,17 @@ class BankAccount {
    * @returns {number} Nuevo saldo
    */
   withdraw(amount, description = 'Retiro') {
+    // if(description !== 'Retiro') throw new Error('la descripcion no es un retiro')
     if (typeof amount !== 'number' || amount <= 0) {
       throw new Error('El monto del retiro debe ser un número positivo');
     }
     // Verificar que haya fondos suficientes antes de retirar
-    if (amount >= this._balance) {
+    if (amount > this.balance) {
       throw new Error('Fondos insuficientes');
     }
-    this._balance -= amount;
-    this._transactions.push(new Transaction('withdrawal', amount, description));
-    return this._balance;
+    this.balance -= amount;
+    this.transactions.push(new Transaction('withdrawal', amount, description));
+    return this.balance;
   }
 
   /**
@@ -109,6 +113,7 @@ class BankAccount {
    * @param {number} amount
    */
   transfer(targetAccount, amount) {
+    if (amount > this.balance) throw new Error('falta plata')
     if (!(targetAccount instanceof BankAccount)) {
       throw new Error(
         'La cuenta destino debe ser una instancia de BankAccount',
@@ -116,7 +121,10 @@ class BankAccount {
     }
     // Primero depositar en el destino, luego retirar del origen
     targetAccount.deposit(amount, `Transferencia desde ${this.owner}`);
-    this.withdraw(amount, `Transferencia hacia ${targetAccount.owner}`);
+    this.balance -= amount
+    this.transactions.push(new Transaction('transfer', amount, `Transferencia hacia ${targetAccount.owner}`))
+
+    return this.balance;
   }
 
   /**
@@ -125,17 +133,28 @@ class BankAccount {
    */
   getTransactionHistory() {
     // Retornar el historial directamente para que el cliente pueda verlo
-    return this._transactions;
+    return [...this.transactions];
   }
 
   /**
    * Calcula el balance reconstruido sumando todos los efectos netos.
-   * Debe coincidir con this._balance.
+   * Debe coincidir con this.balance.
    * @returns {number}
    */
   getCalculatedBalance() {
     // Recalcular el balance sumando todos los efectos de las transacciones
-    return this._transactions.reduce((acc, tx) => acc + tx.getNetEffect());
+    const calculo = this.transactions.reduce((acc, tx) => {
+      let cambio = 0
+
+      if (tx.type === 'deposit') cambio = tx.amount
+      else cambio = (tx.amount) * -1
+
+      // console.log(cambio)
+      return acc + cambio
+
+    }, 0);
+
+    return this.initialBalance + calculo
   }
 
   /**
@@ -143,7 +162,7 @@ class BankAccount {
    * @returns {number}
    */
   countDeposits() {
-    return this._transactions.filter((tx) => tx.type === 'deposit').length;
+    return this.transactions.filter((tx) => tx.type === 'deposit').length;
   }
 
   /**
@@ -151,13 +170,13 @@ class BankAccount {
    * @returns {number}
    */
   countWithdrawals() {
-    return this._transactions.filter(
+    return this.transactions.filter(
       (tx) => tx.type === 'withdrawal' || tx.type === 'transfer',
     ).length;
   }
 
   toString() {
-    return `Cuenta de ${this.owner} | Saldo: $${this._balance.toFixed(2)}`;
+    return `Cuenta de ${this.owner} | Saldo: $${this.balance.toFixed(2)}`;
   }
 }
 
@@ -186,7 +205,7 @@ class SavingsAccount extends BankAccount {
       throw new Error('El saldo mínimo no puede ser negativo');
     }
     // Guardar la tasa tal como viene (ej. 5 = 5%)
-    this.interestRate = interestRate;
+    this.interestRate = interestRate / 100;
     this.minimumBalance = minimumBalance;
   }
 
@@ -197,7 +216,7 @@ class SavingsAccount extends BankAccount {
    */
   applyInterest() {
     // Calcular el interés como: saldo actual × tasa de interés
-    const interest = parseFloat((this._balance * this.interestRate).toFixed(2));
+    const interest = parseFloat((this.balance * (this.interestRate)).toFixed(2));
     this.deposit(interest, 'Interés periódico');
     return interest;
   }
@@ -213,18 +232,18 @@ class SavingsAccount extends BankAccount {
       throw new Error('El monto del retiro debe ser un número positivo');
     }
     // Verificar que no se viole el mínimo, y luego retirar
-    if (this._balance - amount <= this.minimumBalance) {
+    if (this.balance - amount < this.minimumBalance) {
       throw new Error(
         `El retiro dejaría el saldo por debajo del mínimo requerido de $${this.minimumBalance}`,
       );
     }
-    this._balance -= amount;
-    this._transactions.push(new Transaction('withdrawal', amount, description));
-    return this._balance;
+    this.balance -= amount;
+    this.transactions.push(new Transaction('withdrawal', amount, description));
+    return this.balance;
   }
 
   toString() {
-    return `Cuenta Ahorros de ${this.owner} | Saldo: $${this._balance.toFixed(2)} | Tasa: ${this.interestRate.toFixed(1)}%`;
+    return `Cuenta Ahorros de ${this.owner} | Saldo: $${this.balance.toFixed(2)} | Tasa: ${this.interestRate.toFixed(1)}%`;
   }
 }
 
@@ -232,3 +251,48 @@ class SavingsAccount extends BankAccount {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { Transaction, BankAccount, SavingsAccount };
 }
+
+// const trasaccion1 = new Transaction('deposit', 100, 'cosas de billete')
+// console.log(trasaccion1.getNetEffect())
+// console.log(trasaccion1.toString())
+
+// const banco1 = new BankAccount('Armando', 2500)
+// const banco2 = new BankAccount('Samuel', 500)
+// console.log(banco1)
+// console.log(banco1.balance())
+// console.log(banco1.deposit(200))
+// console.log(banco1.withdraw(200))
+// console.log(banco1.getTransactionHistory())
+// console.log(banco1.getCalculatedBalance())
+// console.log(banco1.countDeposits())
+// console.log(banco1.countWithdrawals())
+// console.log(banco1.transfer(banco2, 500))
+// console.log(banco1.getTransactionHistory())
+// console.log(banco1.balance())
+// console.log('////////////////')
+
+
+
+// console.log('////////////////')
+// const cuentaAhorro = new SavingsAccount('Armando', 100, 5, 50)
+// console.log(cuentaAhorro)
+// console.log(cuentaAhorro.toString())
+// console.log(cuentaAhorro.applyInterest())
+
+// const acc = new BankAccount('Ana', 500);
+// console.log(acc)
+// console.log(acc.owner)
+// console.log(acc.owner)
+
+// const sa = new SavingsAccount('Lucía', 500, 5, 100);
+// console.log(sa.withdraw(400))
+const valor = 16
+const proporsion = 1.618
+const arryPropor = [valor]
+for (let i = 0; i < 10 ; i++){
+  arryPropor.push(parseFloat((arryPropor[arryPropor.length - 1] * proporsion).toFixed(4)))
+}
+
+// console.log(arryPropor)
+
+
