@@ -110,7 +110,7 @@ async function secureCreatePost(postData) {
   if (!postData.title || typeof postData.title !== 'string') {
     throw new Error('Título inválido');
   }
-  if (!postData.body || postData.body.length < 5) {
+  if (!postData.body || postData.body.length <= 5) {
     throw new Error('El cuerpo debe tener al menos 5 caracteres');
   }
 
