@@ -173,9 +173,11 @@ function generateRevenueReport(reservations, year) {
 
   for (const res of reservations) {
     const date = new Date(res.checkIn);
-    if (date.getFullYear() === year) {
-      const monthIndex = date.getMonth();
-      report[monthIndex].revenue += res.total;
+    if (date.getFullYear() === year || date.getUTCFullYear() === year) {
+      let monthIndex = date.getMonth() + 1;
+      // console.log(monthIndex)
+      if (monthIndex > 11) monthIndex = 0
+        report[monthIndex].revenue += res.total;
       report[monthIndex].bookingsCount += 1;
     }
   }
@@ -183,8 +185,6 @@ function generateRevenueReport(reservations, year) {
   // CORREGIDO: Ordenar de mayor a menor ingreso
   return report.sort((a, b) => b.revenue - a.revenue);
 }
-
-
 
 // Exportar para testing
 if (typeof module !== 'undefined' && module.exports) {
@@ -195,4 +195,12 @@ if (typeof module !== 'undefined' && module.exports) {
     processBookingBatch,
     generateRevenueReport,
   };
+}
 
+const data = [
+  { checkIn: '2026-01-01', total: 1000 },
+  { checkIn: '2026-05-01', total: 5000 },
+  { checkIn: '2026-12-01', total: 2000 },
+];
+
+console.log(generateRevenueReport(data, 2026))

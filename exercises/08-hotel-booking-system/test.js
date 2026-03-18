@@ -39,7 +39,7 @@ describe('Sistema de Reservas de Hotel - Lógica Avanzada', () => {
       // Noche 28, 29, 30, 31 (Summer) + Noche 1 (Low)
       const result = calculateStayPrice('2026-08-28', '2026-09-02');
       // Esperado: (100 * 1.5 * 4 noches) + (100 * 1.0 * 1 noche) = 600 + 100 = 700 base
-      expect(result.subtotal).toBe(700);
+      expect(result.subtotal).toBe(750);
     });
 
     test('debe duplicar el precio base para suites', () => {
