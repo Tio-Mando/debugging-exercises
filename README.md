@@ -232,6 +232,7 @@ Este proyecto es ideal para:
 72. ✅ **72-loan-manager** - Múltiples Errores Lógicos: 6 bugs de asignación, comparación y tipos afectan disponibilidad de libros, cálculo de multas, registro de devoluciones, consulta por miembro, ordenamiento y renovaciones (Avanzado)
 73. ✅ **73-investment-analyzer** - Múltiples Errores Lógicos: 7 bugs en fórmulas financieras (ROI, interés compuesto, CAGR, Regla del 72, Break-Even, volatilidad y ranking) producen cálculos de inversiones incorrectos (Avanzado)
 74. ✅ **74-stats-calculator** - Múltiples Errores Lógicos: 6 bugs en métricas estadísticas (mediana sin ordenar, varianza poblacional vs muestral, moda vacía, z-scores incorrectos, correlación de Pearson y detección de outliers) (Avanzado)
+75. ✅ **75-hotel-booking** - Error Lógico: operandos invertidos en el cálculo de noches (checkIn - checkOut en vez de checkOut - checkIn) provoca costos e ingresos negativos (Intermedio)
 
 ## 🔧 Solución de Problemas
 
