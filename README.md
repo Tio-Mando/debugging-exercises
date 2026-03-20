@@ -235,6 +235,7 @@ Este proyecto es ideal para:
 75. ✅ **75-hotel-booking** - Error Lógico: operandos invertidos en el cálculo de noches (checkIn - checkOut en vez de checkOut - checkIn) provoca costos e ingresos negativos (Intermedio)
 76. ✅ **76-parking-lot-manager** - Error Lógico: `Math.floor` en lugar de `Math.ceil` al calcular horas de estacionamiento provoca tarifas incorrectas en estadías con horas parciales (Avanzado)
 77. ✅ **77-tournament-manager** - Error Lógico: una victoria suma 2 puntos en vez de 3, distorsionando la tabla de posiciones y todos los cálculos que dependen de ella (Avanzado)
+78. ✅ **78-real-estate-agency** - Múltiples Errores Lógicos: 4 bugs en `getPricePerSqMeter` (operandos invertidos), `getDiscountPercentage` (denominador incorrecto), `getAverageSalePrice` (usa precio listado) y `getTopAgents` (orden ascendente) (Avanzado)
 
 ## 🔧 Solución de Problemas
 
