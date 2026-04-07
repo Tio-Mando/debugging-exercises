@@ -153,3 +153,10 @@ if (typeof module !== 'undefined' && module.exports) {
 // console.log(addItem(cart, newItem))
 // console.log(cart)
 // console.log('////////////////////////')
+
+
+const arry1 = [{valor: 2}]
+const arry2 = [...arry1]
+console.log(arry2[0].valor = 3)
+console.log(arry1)
+console.log(arry2)
