@@ -12,6 +12,7 @@
  */
 function getFlightDuration(flight) {
   // Acceder al horario del vuelo para calcular la duración
+  if (!flight || !flight.schedule) throw new Error('El vuelo debe tener un horario definido')
   const { departure, arrival } = flight.schedule;
   return (new Date(arrival) - new Date(departure)) / (1000 * 60);
 }
@@ -27,6 +28,8 @@ function calculateFare(flight) {
   if (!flight || typeof flight.baseFare !== 'number') {
     throw new Error('El vuelo debe tener una tarifa base definida');
   }
+  if (flight.availableSeats <= 0) throw new Error('El vuelo no tiene asientos disponibles')
+
   const fare = flight.baseFare / flight.availableSeats;
   return Math.round(fare * 100) / 100;
 }
@@ -42,6 +45,7 @@ function bookFlight(flight, passenger) {
   if (!flight || !passenger) {
     throw new Error('Se requieren datos del vuelo y del pasajero');
   }
+  if (!passenger.contact || passenger.contact.email === undefined) throw new Error('El pasajero debe tener un correo de contacto registrado')
   return {
     confirmationCode: `${flight.flightNumber}-${passenger.id}`,
     passengerName: passenger.name,

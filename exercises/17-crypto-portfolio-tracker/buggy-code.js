@@ -34,7 +34,7 @@ class Asset {
   getAverageCost() {
     if (this.transactions.length === 0) return 0;
     const totalInvested = this.getTotalInvested();
-    return totalInvested / this.transactions.length;
+    return totalInvested / this.getTotalUnits();
   }
 
   getCurrentValue(currentPrice) {
@@ -116,8 +116,8 @@ if (typeof module !== 'undefined' && module.exports) {
 if (require.main === module) {
   (async () => {
     const portfolio = new Portfolio('Mi Portafolio');
-    portfolio.buy('bitcoin', 0.5, 40000);
-    portfolio.buy('bitcoin', 0.3, 45000);
+    portfolio.buy('bitcoin', 9, 40000);
+    portfolio.buy('bitcoin', 1, 60000);
     portfolio.buy('ethereum', 2, 2500);
     const coinIds = Object.keys(portfolio.assets);
     const prices = await fetchCryptoPrices(coinIds);

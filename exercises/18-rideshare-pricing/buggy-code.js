@@ -11,9 +11,9 @@ function haversineDistance(lat1, lng1, lat2, lng2) {
   const a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
     Math.cos((lat1 * Math.PI) / 180) *
-      Math.cos((lat2 * Math.PI) / 180) *
-      Math.sin(dLng / 2) *
-      Math.sin(dLng / 2);
+    Math.cos((lat2 * Math.PI) / 180) *
+    Math.sin(dLng / 2) *
+    Math.sin(dLng / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
 }
@@ -55,7 +55,7 @@ class PriceCalculator {
   calculateFare(ride) {
     const distanceFare = this.getDistanceFare(ride);
     const timeFare = this.getTimeFare(ride);
-    return this.BASE_FARE * ride.surge + distanceFare + timeFare;
+    return (this.BASE_FARE + distanceFare + timeFare) * ride.surge;
   }
 
   getBreakdown(ride) {
@@ -92,7 +92,7 @@ if (require.main === module) {
     const origin = await fetchCoordinates('Bogotá, Colombia');
     const destination = await fetchCoordinates('Medellín, Colombia');
     const distanceKm = haversineDistance(origin.lat, origin.lng, destination.lat, destination.lng);
-    const ride = new Ride(origin, destination, distanceKm, 60, 1.5);
+    const ride = new Ride(origin, destination, 5, 10, 2);
     console.log('Desglose del viaje:', calculator.getBreakdown(ride));
   })();
 }

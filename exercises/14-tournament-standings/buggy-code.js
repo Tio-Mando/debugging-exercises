@@ -31,7 +31,7 @@ function createTeam(name) {
  */
 function calculatePoints(wins, draws) {
   // Sistema de puntuación: victoria suma puntos, empate suma 1 punto
-  return wins * 2 + draws * 1;
+  return wins * 3 + draws * 1;
 }
 
 /**
@@ -47,8 +47,8 @@ function recordMatch(homeTeam, awayTeam, homeScore, awayScore) {
   // Actualizar estadísticas de goles para ambos equipos
   homeTeam.goalsFor += homeScore;
   homeTeam.goalsAgainst += awayScore;
-  awayTeam.goalsFor += homeScore;
-  awayTeam.goalsAgainst += awayScore;
+  awayTeam.goalsFor += awayScore;
+  awayTeam.goalsAgainst +=  homeScore;
 
   if (homeScore > awayScore) {
     homeTeam.wins++;
@@ -83,7 +83,7 @@ function getGoalDifference(team) {
 function getStandings(teams) {
   // Ordenar equipos según los criterios de clasificación del torneo
   return [...teams].sort((a, b) => {
-    if (b.points !== a.points) return a.points - b.points;
+    if (b.points !== a.points) return b.points - a.points;
     const gdDiff = getGoalDifference(b) - getGoalDifference(a);
     if (gdDiff !== 0) return gdDiff;
     return b.goalsFor - a.goalsFor;

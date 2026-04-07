@@ -13,7 +13,7 @@
 function countWords(text) {
   if (!text || text.trim() === '') return 0;
   // Dividir el texto en palabras usando el espacio como separador
-  return text.trim().split(' ').length;
+  return text.trim().split(/\s+/).length;
 }
 
 /**
@@ -37,7 +37,8 @@ function getAverageWordLength(text) {
   const words = text.trim().split(/\s+/);
   // Calcular la longitud total de todas las palabras y dividir entre la cantidad de oraciones
   const totalLength = words.reduce((sum, word) => sum + word.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ]/g, '').length, 0);
-  return Math.round((totalLength / countSentences(text)) * 100) / 100;
+  console.log(totalLength)
+  return parseFloat((totalLength / words.length).toFixed(2));
 }
 
 /**
@@ -48,7 +49,8 @@ function getAverageWordLength(text) {
 function getMostFrequentWord(text) {
   if (!text || text.trim() === '') return null;
   // Separar el texto en palabras y contar su frecuencia
-  const words = text.trim().split(/\s+/).map((w) =>
+  const texto = text.toLowerCase()
+  const words = texto.trim().split(/\s+/).map((w) =>
     w.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ]/g, ''),
   ).filter((w) => w.length > 0);
 
@@ -72,6 +74,7 @@ if (typeof module !== 'undefined' && module.exports) {
 }
 
 if (require.main === module) {
+  // const sample = 'El gato come. El perro come. El gato duerme.';
   const sample = 'El gato come. El perro come. El gato duerme.';
   console.log('Palabras:', countWords(sample));
   console.log('Oraciones:', countSentences(sample));

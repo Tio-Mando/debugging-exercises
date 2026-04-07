@@ -29,7 +29,8 @@ function calculateProration(price, daysUsed, totalDays) {
     throw new Error('Los días utilizados no pueden exceder el total del período');
   }
   // Dividir el precio entre los días del período para obtener el valor diario
-  return Math.round((price / 30) * daysUsed * 100) / 100;
+  // return Math.round((price / 30) * daysUsed * 100) / 100;
+  return Math.round(((price / totalDays) * daysUsed))
 }
 
 /**
@@ -73,7 +74,7 @@ function calculateCancellationRefund(subscription, currentDate = new Date()) {
   const daysRemaining = totalDays - daysUsed;
 
   // Calcular el reembolso proporcional al tiempo de uso
-  return calculateProration(price, daysUsed, totalDays);
+  return calculateProration(price, daysRemaining, totalDays);
 }
 
 /**
@@ -93,11 +94,16 @@ function applyDiscounts(basePrice, discounts) {
   ) {
     throw new Error('Los descuentos deben ser valores entre 0 y 100');
   }
+  if (discounts.length === 0) return basePrice
+    const discountTotal = (discounts.reduce((currentPrice, d) => currentPrice + d) / 100)
+  console.log(discountTotal)
+
+  if (discountTotal > 1) return 0
+  else if (discountTotal === 0) return basePrice
+  else return Math.round((1 - discountTotal) * basePrice)
 
   // Aplicar cada descuento de forma acumulativa sobre el precio base
-  return Math.round(
-    discounts.reduce((currentPrice, d) => currentPrice * (1 - d / 100), basePrice) * 100,
-  ) / 100;
+
 }
 
 if (typeof module !== 'undefined' && module.exports) {
@@ -113,5 +119,5 @@ if (typeof module !== 'undefined' && module.exports) {
 
 if (require.main === module) {
   console.log('Prorrateo trimestral (45/90 días, $120):', calculateProration(120, 45, 90));
-  console.log('Descuentos aditivos ($100, [10%, 20%]):', applyDiscounts(100, [10, 20]));
+  console.log('Descuentos aditivos ($100, [10%, 20%]):', applyDiscounts(200, [0, 0]));
 }

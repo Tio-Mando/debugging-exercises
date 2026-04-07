@@ -42,11 +42,11 @@ function findBook(catalog, id) {
 function checkoutBook(catalog, bookId, userId) {
   const book = findBook(catalog, bookId);
   // Verificar disponibilidad antes de proceder con el préstamo
-  if (!book.available) {
-    throw new Error(`El libro "${book.title}" no está disponible actualmente`);
-  }
   if (!book) {
     throw new Error(`Libro con ID "${bookId}" no encontrado`);
+  }
+  if (!book.available) {
+    throw new Error(`El libro "${book.title}" no está disponible actualmente`);
   }
   book.available = false;
   book.checkedOutBy = userId;
@@ -65,7 +65,7 @@ function returnBook(catalog, bookId) {
     throw new Error(`Libro con ID "${bookId}" no encontrado`);
   }
   // Verificar que el libro esté efectivamente prestado antes de registrar la devolución
-  if (book.checkedOutBy.length === 0) {
+  if (book.checkedOutBy === null) {
     throw new Error(`El libro "${book.title}" no está prestado actualmente`);
   }
   book.available = true;
@@ -82,7 +82,7 @@ function getStats(catalog) {
   const total = catalog.length;
   const available = catalog.filter((b) => b.available).length;
   // Contar los libros que están actualmente fuera del catálogo
-  const checkedOut = catalog.filter((b) => b.checkedOut).length;
+  const checkedOut = catalog.filter((b) => b.available === false).length;
   return {
     total,
     available,
@@ -97,5 +97,8 @@ if (typeof module !== 'undefined' && module.exports) {
 if (require.main === module) {
   const catalog = [];
   addBook(catalog, { id: 'B001', title: 'El Quijote', author: 'Cervantes' });
+  checkoutBook(catalog, 'B001', '0001ASD' )
+  returnBook(catalog, 'B001' )
   console.log(getStats(catalog));
+  console.log(catalog);
 }

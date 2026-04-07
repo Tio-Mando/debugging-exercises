@@ -29,8 +29,10 @@ class Student {
   // Calcula el GPA ponderado por créditos de cada materia
   calculateGPA() {
     if (this.courses.length === 0) return 0.0;
-    const totalPoints = this.courses.reduce((sum, c) => sum + c.gradePoints, 0);
-    return totalPoints / this.courses.length;
+    const totalPoints = this.courses.reduce((sum, c) => sum + c.gradePoints * c.creditHours, 0);
+    console.log(totalPoints)
+    console.log(this.getTotalCredits())
+    return totalPoints / this.getTotalCredits() ;
   }
 
   getAcademicStatus() {
@@ -80,12 +82,13 @@ if (typeof module !== 'undefined' && module.exports) {
 if (require.main === module) {
   (async () => {
     const student = await fetchStudentData(1);
-    student.addCourse(new Course('Cálculo', 4.0, 4));
-    student.addCourse(new Course('Historia', 3.0, 3));
-    student.addCourse(new Course('Física', 2.5, 4));
-    student.addCourse(new Course('Inglés', 3.5, 2));
+    student.addCourse(new Course('Cálculo', 4.0, 1));
+    student.addCourse(new Course('Historia', 2.0, 3));
+    // student.addCourse(new Course('Física', 2.5, 4));
+    // student.addCourse(new Course('Inglés', 3.5, 2));
     console.log(`Estudiante: ${student.name}`);
     console.log(`GPA: ${student.calculateGPA().toFixed(2)}`);
     console.log(`Estado: ${student.getAcademicStatus()}`);
+    console.log(student)
   })();
 }
