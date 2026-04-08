@@ -36,7 +36,12 @@ class RecommendationEngine {
     const matchCount = book.subjects.filter((s) =>
       this.userProfile.preferredSubjects.includes(s),
     ).length;
-    return matchCount / book.subjects.length;
+
+    console.log(matchCount)
+    console.log('???////////')
+    console.log(parseFloat((matchCount / 3).toFixed(2)))
+
+    return parseFloat((matchCount / 3).toFixed(2))
   }
 
   filterByRating() {

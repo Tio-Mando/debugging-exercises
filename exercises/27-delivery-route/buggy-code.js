@@ -45,7 +45,7 @@ class RouteCalculator {
       totalDistance += haversineDistance(current.lat, current.lng, stop.lat, stop.lng);
       current = stop;
     }
-    return totalDistance;
+    return totalDistance * 2;
   }
 
   getEstimatedDuration(distanceKm, avgSpeedKmh = 40) {

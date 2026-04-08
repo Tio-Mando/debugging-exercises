@@ -43,7 +43,9 @@ class MarketAnalyzer {
   // Calcula la mediana de precios para representar el precio típico del mercado
   getMedianPrice() {
     if (this.listings.length === 0) return 0;
-    const prices = this.listings.map((l) => l.property.price);
+    const prices = this.listings.map((l) => l.property.price).sort((a, b) => a - b);
+
+    // console.log(prices.length, 'elementos')
     const mid = Math.floor(prices.length / 2);
     if (prices.length % 2 === 0) {
       return (prices[mid - 1] + prices[mid]) / 2;
@@ -90,12 +92,30 @@ if (typeof module !== 'undefined' && module.exports) {
 }
 
 if (require.main === module) {
-  (async () => {
-    const analyzer = new MarketAnalyzer();
-    const listings = await fetchListings(10);
-    listings.forEach((l) => analyzer.addListing(l));
-    console.log('Precio promedio:', analyzer.getAveragePrice().toLocaleString());
-    console.log('Precio mediana:', analyzer.getMedianPrice().toLocaleString());
-    console.log('Rango de precios:', analyzer.getPriceRange());
-  })();
+  // (async () => {
+  //   const analyzer = new MarketAnalyzer();
+  //   const listings = await fetchListings(10);
+  //   listings.forEach((l) => analyzer.addListing(l));
+  //   console.log('Precio promedio:', analyzer.getAveragePrice().toLocaleString());
+  //   console.log('Precio mediana:', analyzer.getMedianPrice().toLocaleString());
+  //   console.log('Rango de precios:', analyzer.getPriceRange());
+  //   const arry = analyzer.listings.map((l) => l.property.price)
+  //   // console.log(arry)
+  //   // console.log(arry.reduce((a, b) => a + b) / arry.length)
+  // })();
 }
+function makeListing(price) {
+  return new Listing(new Property(1, 'Dir', price, 100, 2), 'Agente', 30);
+}
+
+const analyzer = new MarketAnalyzer();
+// Ingresados en orden NO ordenado
+analyzer.addListing(makeListing(500000));
+analyzer.addListing(makeListing(200000));
+analyzer.addListing(makeListing(100000));
+analyzer.addListing(makeListing(300000));
+analyzer.addListing(makeListing(400000));
+
+console.log('Precio promedio:', analyzer.getAveragePrice().toLocaleString());
+console.log('Precio mediana:', analyzer.getMedianPrice().toLocaleString());
+console.log('Rango de precios:', analyzer.getPriceRange());

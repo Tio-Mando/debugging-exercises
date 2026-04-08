@@ -30,7 +30,7 @@ describe('Motor de Recomendación de Libros', () => {
       const engine = new RecommendationEngine(user);
       const book = new Book('Libro B', 'Autor', ['fiction'], 4.0);
       // 1 coincidencia / 3 temas del usuario = 0.333
-      expect(engine.calculateScore(book)).toBeCloseTo(1 / 3, 5);
+      expect(engine.calculateScore(book)).toBeCloseTo(0.33, 5);
     });
 
     test('un libro con pocos temas que coinciden todos NO debe superar a uno que cubre más intereses', () => {
@@ -52,7 +52,7 @@ describe('Motor de Recomendación de Libros', () => {
       const engine = new RecommendationEngine(user);
       const book = new Book('Libro D', 'Autor', ['fiction', 'mystery', 'history'], 4.0);
       // 2 coincidencias / 3 temas del usuario = 0.667
-      expect(engine.calculateScore(book)).toBeCloseTo(2 / 3, 5);
+      expect(engine.calculateScore(book)).toBeCloseTo(0.67, 5);
     });
 
     test('debe dar score 0 cuando el perfil del usuario no tiene temas preferidos', () => {

@@ -38,8 +38,9 @@ class Portfolio {
 
     return this.assets.map((asset) => {
       const currentPrice = prices[asset.coinId] || 0;
+      // console.log(prices[asset.coinId])
       const currentValue = asset.getCurrentValue(currentPrice);
-      const targetValue = totalValue / this.assets.length;
+      const targetValue = totalValue * (asset.targetPercentage / 100);
       const difference = targetValue - currentValue;
 
       return {
@@ -87,6 +88,7 @@ if (require.main === module) {
     portfolio.addAsset(new Asset('bitcoin', 60, 0.1));
     portfolio.addAsset(new Asset('ethereum', 30, 2));
     portfolio.addAsset(new Asset('cardano', 10, 1000));
+    console.log(portfolio)
 
     const coinIds = portfolio.assets.map((a) => a.coinId);
     const prices = await fetchCryptoPrices(coinIds);
@@ -98,3 +100,5 @@ if (require.main === module) {
     });
   })();
 }
+
+
