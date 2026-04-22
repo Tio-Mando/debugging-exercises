@@ -13,8 +13,8 @@
  * @returns {number[][]}
  */
 function transpose(matrix) {
-  const n = matrix.length;
-  return matrix.map((row, i) => row.map((_, j) => matrix[j][i]));
+  const n = [...matrix];
+  return n.map((row, i) => row.map((col, j) => n[j][i]));
 }
 
 /**
@@ -23,8 +23,16 @@ function transpose(matrix) {
  * @returns {number[][]}
  */
 function rotateMatrix(matrix) {
-  const reversed = matrix.map(row => [...row].reverse());
-  return transpose(reversed);
+  const reversed = transpose(matrix)
+  return reversed.map(row => [...row].reverse());
 }
 
 module.exports = { rotateMatrix };
+
+
+const contenido = [
+  [1, 2],
+  [3, 4]
+]
+console.log(contenido)
+console.log(rotateMatrix(contenido))

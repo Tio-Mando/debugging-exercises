@@ -5,8 +5,7 @@
  * El algoritmo greedy de toRoman requiere que la tabla esté ordenada
  * de mayor a menor para que siempre se tome el valor más grande posible.
  */
-
-const ROMAN_TABLE = [
+const original = [
   [1, 'I'],
   [4, 'IV'],
   [5, 'V'],
@@ -21,6 +20,8 @@ const ROMAN_TABLE = [
   [900, 'CM'],
   [1000, 'M'],
 ];
+const ROMAN_TABLE = original.reverse()
+
 
 /**
  * Convierte un entero (1-3999) a numeral romano.
@@ -32,9 +33,15 @@ function toRoman(num) {
   let remaining = num;
 
   for (const [value, numeral] of ROMAN_TABLE) {
+    // let verification = numeral+numeral+numeral
+    // console.log(verification)
+
     while (remaining >= value) {
       result += numeral;
       remaining -= value;
+
+      console.log(result)
+      console.log(remaining, ' que pasa chavales ')
     }
   }
 
@@ -64,4 +71,6 @@ function fromRoman(roman) {
   return total;
 }
 
+
+console.log(toRoman(6))
 module.exports = { toRoman, fromRoman };

@@ -15,10 +15,12 @@ function generateSlug(title) {
   return title
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/[^a-zA-Z0-9]+/g, '-')
     .toLowerCase()
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '');
 }
 
 module.exports = { generateSlug };
+
+console.log(generateSlug('Hola mundo'))

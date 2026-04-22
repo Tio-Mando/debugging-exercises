@@ -36,9 +36,12 @@ function encode(str) {
 function decode(str) {
   if (!str) return '';
 
-  return str.replace(/(\d)([a-zA-Z])/g, (_, count, char) => {
+  return str.replace(/(\d+)([a-zA-Z])/g, (_, count, char) => {
+    console.log(_,count, char)
     return char.repeat(parseInt(count, 10));
   });
 }
 
 module.exports = { encode, decode };
+console.log(encode('aaaaaaaaaa'))
+console.log(decode('2a45b'))

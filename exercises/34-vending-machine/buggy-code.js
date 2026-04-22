@@ -17,8 +17,9 @@ function calculateChange(paid, price, availableCoins) {
   const changeAmount = paid - price;
 
   if (changeAmount === 0) return { coins: [], possible: true };
-
-  const sortedCoins = [...availableCoins].sort((a, b) => a - b);
+console.log(availableCoins)
+const sortedCoins = [...availableCoins].sort((a, b) => b - a);
+console.log(sortedCoins)
 
   const usedCoins = [];
   let remaining = changeAmount;
@@ -48,3 +49,6 @@ function canMakeChange(amount, availableCoins) {
 }
 
 module.exports = { calculateChange, canMakeChange };
+
+  const COINS = [1, 5, 10, 25, 50, 100];
+console.log(calculateChange(100, 55, COINS))
