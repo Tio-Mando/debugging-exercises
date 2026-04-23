@@ -156,7 +156,6 @@ if (typeof module !== 'undefined' && module.exports) {
 
 
 const arry1 = [{valor: 2}]
-const arry2 = [...arry1]
-console.log(arry2[0].valor = 3)
+const arry2 = [...arry1]ß
 console.log(arry1)
 console.log(arry2)
