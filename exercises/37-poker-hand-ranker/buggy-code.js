@@ -38,3 +38,6 @@ function rankHand(hand) {
 }
 
 module.exports = { rankHand };
+
+const arry = ['2H', '2D', '2C', '8S', 'KH']
+console.log(rankHand(arry))
