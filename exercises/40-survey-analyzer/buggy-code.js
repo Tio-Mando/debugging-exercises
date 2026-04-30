@@ -33,8 +33,9 @@ function getMedian(values) {
 function getPercentile(values, p) {
   const sorted = [...values].sort((a, b) => a - b);
   // Usa sorted.length en lugar de sorted.length - 1 como límite del índice
-  const index = Math.floor((p / 100) * sorted.length);
-  return sorted[index];
+  const index = Math.floor((p / 100) * sorted.length - 1);
+  if (index < 0) return sorted[0]
+    return sorted[index];
 }
 
 // Calcula estadísticas completas para un conjunto de respuestas numéricas

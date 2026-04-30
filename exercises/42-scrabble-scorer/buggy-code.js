@@ -47,12 +47,19 @@ function scorePlacement(word, squares) {
     const square = squares.find(s => s.pos === idx);
     const baseValue = getLetterValue(letter);
     if (!square || !square.type) return bonus;
-    if (square.type === 'DL') return bonus + baseValue;
-    if (square.type === 'TL') return bonus + baseValue * 2;
+    if (square.type === 'DL') return bonus + baseValue * 2 - baseValue;
+    if (square.type === 'TL') return bonus + baseValue * 3 - baseValue;
     return bonus;
   }, 0);
-
-  return baseScore * wordMultiplier + letterBonuses;
+  console.log(
+    {
+      baseScore: baseScore,
+      wordMultiplier: wordMultiplier,
+      letterBonuses: letterBonuses
+    }
+  )
+  return (baseScore + letterBonuses)* wordMultiplier;
+  // return baseScore * wordMultiplier + letterBonuses;
 }
 
 // Retorna la palabra con mayor puntaje de una lista

@@ -24,7 +24,8 @@ function getDaysInMonth(year, month) {
  */
 function buildCalendar(year, month) {
   const totalDays = getDaysInMonth(year, month);
-  const firstDayOfWeek = new Date(year, month - 1, 1).getDay();
+  console.log(totalDays)
+  const firstDayOfWeek = new Date(year, month - 1, 0).getDay();
 
   const weeks = [];
   let week = Array(7).fill(null);
@@ -49,3 +50,6 @@ function buildCalendar(year, month) {
 }
 
 module.exports = { buildCalendar, getDaysInMonth };
+
+
+console.log(buildCalendar(2026, 4))
