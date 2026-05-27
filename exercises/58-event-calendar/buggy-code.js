@@ -67,7 +67,7 @@ class EventCalendar {
 
   generateRecurringDates(startDate, intervalDays, count) {
     const dates = [];
-    for (let i = 1; i <= count; i++) {
+    for (let i = 0; i < count; i++) {
       dates.push(addDays(startDate, i * intervalDays));
     }
     return dates;
@@ -181,3 +181,28 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = { EventCalendar };
 }
 
+
+let calendar = new EventCalendar();
+calendar.addEvent({
+  id: 'E001',
+  title: 'Daily Standup',
+  date: '2024-03-01',
+  startTime: '09:00',
+  endTime: '09:30',
+});
+calendar.addEvent({
+  id: 'E002',
+  title: 'Team Lunch',
+  date: '2024-03-01',
+  startTime: '12:00',
+  endTime: '13:00',
+});
+calendar.addEvent({
+  id: 'E003',
+  title: 'Sprint Review',
+  date: '2024-03-05',
+  startTime: '15:00',
+  endTime: '16:00',
+});
+
+console.log(calendar.generateRecurringDates('2024-03-01', 7, 4))

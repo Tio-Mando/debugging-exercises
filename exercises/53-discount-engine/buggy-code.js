@@ -14,8 +14,14 @@ function applyFlatDiscount(price, amount) {
 }
 
 function stackDiscounts(price, discountRates) {
-  const totalRate = discountRates.reduce((sum, rate) => sum + rate, 0);
-  return applyPercentageDiscount(price, totalRate);
+  if (!discountRates || discountRates.length === 0) return price
+  // const totalRate = discountRates.reduce((sum, rate) => sum + rate, 0);
+  let pricePerDiscoutn = price
+  return discountRates.reduce((price, rate) => {
+    return pricePerDiscoutn = applyPercentageDiscount(pricePerDiscoutn, rate)
+  }, 0)
+
+  // return applyPercentageDiscount(price, totalRate);
 }
 
 function calculateCouponDiscount(price, coupon) {
@@ -168,3 +174,5 @@ if (typeof module !== 'undefined' && module.exports) {
   };
 }
 
+// console.log(applyPercentageDiscount(100, 0.2))
+console.log(stackDiscounts(100, [0.1, 0.2]), 'aja')

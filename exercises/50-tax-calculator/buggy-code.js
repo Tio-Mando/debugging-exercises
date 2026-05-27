@@ -7,10 +7,16 @@
 
 // Calcula el impuesto total aplicando tramos progresivos
 function calculateTax(income, brackets) {
+  let mod = income
   return brackets.reduce((totalTax, bracket) => {
     if (income <= bracket.min) return totalTax;
     // Aplica la tasa al ingreso TOTAL en lugar de solo al monto dentro del tramo
-    return totalTax + income * bracket.rate;
+    if ((bracket.max - bracket.min) <= mod) {
+      let rest = (bracket.max - bracket.min)
+      mod -= rest
+      console.log(mod, rest)
+      return totalTax + rest * bracket.rate;
+    } else return totalTax + mod * bracket.rate;
   }, 0);
 }
 
@@ -60,9 +66,9 @@ if (typeof module !== 'undefined' && module.exports) {
 
 if (require.main === module) {
   const brackets = [
-    { min: 0,     max: 10000,    rate: 0.10 },
-    { min: 10000, max: 40000,    rate: 0.20 },
-    { min: 40000, max: 80000,    rate: 0.30 },
+    { min: 0, max: 10000, rate: 0.10 },
+    { min: 10000, max: 40000, rate: 0.20 },
+    { min: 40000, max: 80000, rate: 0.30 },
     { min: 80000, max: Infinity, rate: 0.40 },
   ];
   console.log('Tax on 50000 (wrong):', calculateTax(50000, brackets));

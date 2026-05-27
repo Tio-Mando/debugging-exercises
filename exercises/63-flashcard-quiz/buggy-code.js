@@ -151,6 +151,7 @@ class FlashcardDeck {
   markCorrect(id) {
     const card = this._findCardOrThrow(id);
     card.attempts += 1;
+    card.correct += 1;
   }
 
   /**
@@ -323,3 +324,14 @@ class FlashcardDeck {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { FlashcardDeck };
 }
+
+
+const deck = new FlashcardDeck('Prueba');
+deck.addCard('pregunta', 'respuesta', 'cat')
+// deck.addCard('pregunta', 'respuesta', 'cat')
+
+console.log(deck)
+console.log(deck.getSuccessRate('card-1'))
+console.log(deck.markCorrect('card-1'))
+console.log(deck)
+console.log(deck.getSuccessRate('card-1'))

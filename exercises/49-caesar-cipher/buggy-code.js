@@ -9,6 +9,7 @@ const ALPHABET_SIZE = 26;
 
 function shiftChar(char, shift) {
   const isUpper = char >= 'A' && char <= 'Z';
+  // console.log('isUpper', isUpper)
   const isLower = char >= 'a' && char <= 'z';
   if (!isUpper && !isLower) return char;
 
@@ -27,7 +28,7 @@ function encrypt(text, shift) {
 // Descifra el texto — usa desplazamiento positivo en lugar de negativo
 function decrypt(text, shift) {
   return Array.from(text)
-    .map(char => shiftChar(char, shift))
+    .map(char => shiftChar(char, shift * -1))
     .join('');
 }
 
@@ -71,8 +72,8 @@ if (typeof module !== 'undefined' && module.exports) {
 }
 
 if (require.main === module) {
-  const message = 'Hello, World!';
-  const encrypted = encrypt(message, 13);
+  const message = 'XYZ';
+  const encrypted = encrypt(message, 3);
   console.log('Encrypted:', encrypted);
-  console.log('Decrypted (wrong):', decrypt(encrypted, 13));
+  console.log('Decrypted (wrong):', decrypt(encrypted, 3));
 }

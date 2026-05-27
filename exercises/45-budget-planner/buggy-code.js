@@ -66,7 +66,7 @@ class BudgetPlanner {
     const expenses = this.getTotalExpenses(month);
     const savings = income - expenses;
     // Divide entre gastos en lugar de ingresos
-    return Math.round((savings / expenses) * 1000) / 1000;
+    return Math.round(income - expenses) / income;
   }
 
   getExpensesByCategory(month) {

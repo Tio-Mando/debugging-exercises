@@ -17,7 +17,11 @@ class Leaderboard {
     if (!this.scores.has(playerId)) {
       this.scores.set(playerId, []);
     }
-    this.scores.get(playerId).push(score);
+    this.scores.get(playerId)
+      .push(score)
+
+    if (this.scores.get(playerId).length > 1) this.scores.get(playerId).sort((a, b) => b - a)
+    console.log(this.scores)
   }
 
   getScoreHistory(playerId) {
@@ -158,4 +162,13 @@ class Leaderboard {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { Leaderboard };
 }
+let board
+board = new Leaderboard();
+board.addScore('Alice', 50);
+board.addScore('Bob', 80);
+board.addScore('Alice', 90);  // Alice mejora su puntaje
+board.addScore('Carol', 80);  // Carol empata con Bob
+board.addScore('Dave', 60);
 
+
+console.log(board)

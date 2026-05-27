@@ -188,7 +188,7 @@ function roi(initialInvestment, finalValue) {
     throw new Error('La inversión inicial debe ser mayor que cero.');
   }
 
-  const result = (initialInvestment - finalValue) / initialInvestment * 100;
+  const result = (finalValue - initialInvestment) / initialInvestment * 100;
   return roundTo(result, 4);
 }
 
@@ -335,3 +335,7 @@ if (typeof module !== 'undefined' && module.exports) {
     filterByMinROI,
   };
 }
+
+
+console.log(compoundInterest(1000, 0.05, 1, 1))
+console.log(roi(1000, 1500))

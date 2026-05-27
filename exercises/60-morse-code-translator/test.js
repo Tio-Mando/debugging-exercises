@@ -21,7 +21,8 @@ const {
 
 // SOS en morse: S = ...  O = ---  S = ...
 // Puntos: 9  Guiones: 3
-const SOS_ENCODED = '... --- ...';
+const 
+SOS_ENCODED = '... --- ...';
 
 // Frase de prueba multi-palabra
 const HELLO_WORLD_ENCODED = '.... . .-.. .-.. --- / .-- --- .-. .-.. -..';

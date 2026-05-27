@@ -23,9 +23,10 @@ function termFrequency(text) {
   }, {});
 
   const uniqueWords = Object.keys(counts).length;
+  console.log('unique;' ,uniqueWords )
 
   return Object.fromEntries(
-    Object.entries(counts).map(([word, count]) => [word, count / uniqueWords])
+    Object.entries(counts).map(([word, count]) => [word, count / tokens.length])
   );
 }
 
@@ -159,3 +160,7 @@ if (typeof module !== 'undefined' && module.exports) {
   };
 }
 
+
+const doc1 = 'the cat sat on the mat';
+console.log(doc1)
+console.log(termFrequency(doc1))

@@ -30,16 +30,19 @@ class ParkingLot {
   findSpot(vehicleSize) {
     const sizeIndex = SIZE_ORDER.indexOf(vehicleSize);
     const compatibleTypes = SIZE_ORDER.slice(sizeIndex);
-    for (const type of compatibleTypes) {
+
+    console.log(compatibleTypes, 'candela')
+    for (const [index, type] of compatibleTypes.entries()) {
       const available = this.getAvailableSpots(type);
-      if (available.length > 0) return available[0];
+      console.log(available, 'DISPONILBESSSSSSSSSS')
+      if (available.length > 0) return available[index];
     }
     return null;
   }
 
   park(vehicle) {
     // Asigna cualquier spot libre ignorando el tipo del vehículo
-    const spot = this.spots.find(s => s.vehicle === null);
+    const spot = this.findSpot(vehicle.size)
     if (!spot) {
       throw new Error(`No hay spots disponibles para vehículo de tamaño ${vehicle.size}`);
     }
@@ -108,4 +111,5 @@ if (require.main === module) {
   ], 2.50);
   lot.park(new Vehicle('ABC123', 'compact', '2024-01-01T08:00:00'));
   console.log('Spot asignado debería ser compact...');
+  console.log(lot)
 }

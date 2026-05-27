@@ -101,7 +101,7 @@ class ContactBook {
    */
   findByPhone(phone) {
     const results = this._contacts.filter((c) => c.phone === phone);
-    return results.length > 0 ? results : null;
+    return results.length > 0 ? results[0] : null;
   }
 
   // ---------------------------------------------------------------------------
@@ -273,3 +273,11 @@ class ContactBook {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = ContactBook;
 }
+
+
+book = new ContactBook();
+book.addContact({ name: 'Ana García', phone: '555-1001', email: 'ana@mail.com', tags: [] });
+book.addContact({ name: 'Bob Torres', phone: '555-1002', email: 'bob@mail.com', tags: [] });
+
+console.log(book)
+console.log(book.findByPhone('555-1001'))

@@ -11,8 +11,9 @@ function jaccardSimilarity(setA, setB) {
   const a = new Set(setA);
   const b = new Set(setB);
   const union = new Set([...a, ...b]);
+  const match = [...a].filter( element => b.has(element)).length
   // Usa la unión en el numerador en lugar de la intersección
-  return union.size / union.size;
+  return match / union.size;
 }
 
 function getUserById(userId, users) {

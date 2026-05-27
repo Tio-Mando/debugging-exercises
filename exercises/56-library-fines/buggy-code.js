@@ -68,8 +68,12 @@ class LibrarySystem {
   calculateFine(dueDate, returnDate) {
     const due = new Date(dueDate);
     const returned = new Date(returnDate);
-    const daysOverdue = Math.floor((due - returned) / MS_PER_DAY);
-    return Math.max(0, daysOverdue) * this.dailyFineRate;
+    if (due < returned) {
+      const daysOverdue = Math.abs((due - returned) / MS_PER_DAY);
+      console.log(due < returned, 'chequeo de tiempo')
+      return Math.max(0, daysOverdue) * this.dailyFineRate;
+    }else return 0
+
   }
 
   returnBook(loanId, returnDate) {
@@ -176,4 +180,12 @@ class LibrarySystem {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { LibrarySystem };
 }
+const library = new LibrarySystem({ dailyFineRate: 0.5 });
+library.addBook({ id: 'B001', title: 'Clean Code', author: 'Robert Martin', copies: 2 });
+library.addBook({ id: 'B002', title: 'Refactoring', author: 'Martin Fowler', copies: 1 });
+library.addMember({ id: 'M001', name: 'Alice' });
+library.addMember({ id: 'M002', name: 'Bob' });
 
+console.log(library.checkout('M002', 'B002', '2024-03-10'))
+console.log(library)
+console.log(library.returnBook('L0001', '2027-04-10'))

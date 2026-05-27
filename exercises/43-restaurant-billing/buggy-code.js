@@ -98,7 +98,7 @@ class BillingSystem {
     const itemCount = order.getItemCount();
     return {
       diners,
-      perPerson: Math.round((bill.total / itemCount) * 100) / 100,
+      perPerson: Math.round((bill.total / diners) * 100) / 100,
       total: bill.total,
     };
   }

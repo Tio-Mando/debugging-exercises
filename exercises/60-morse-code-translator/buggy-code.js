@@ -113,7 +113,7 @@ function getMorseSymbolCount(word) {
  * @throws {Error} Si el carácter no existe en MORSE_CODE.
  */
 function encodeChar(char) {
-  if (!Object.prototype.hasOwnProperty.call(MORSE_CODE, char) && char !== ' ') {
+  if (!Object.prototype.hasOwnProperty.call(MORSE_CODE, char) || char == ' ') {
     throw new Error(
       `Carácter no codificable: "${char}". Solo se admiten letras A-Z y dígitos 0-9.`
     );
@@ -166,7 +166,7 @@ function encodeText(text) {
       word
         .split('')
         .map((ch) => encodeChar(ch))
-        .join('')
+        .join(' ')
     )
     .join(' / ');
 }
@@ -184,7 +184,7 @@ function encodeText(text) {
  */
 function decodeText(morse) {
   return morse
-    .split('/')
+    .split(' / ')
     .map((wordMorse) =>
       wordMorse
         .split(' ')
@@ -212,7 +212,7 @@ function validateText(text) {
   const invalidChars = upper
     .split('')
     .filter((ch) => ch !== ' ')
-    .filter((ch) => Object.prototype.hasOwnProperty.call(MORSE_CODE, ch))
+    .filter((ch) => !Object.prototype.hasOwnProperty.call(MORSE_CODE, ch))
     .reduce((acc, ch) => {
       if (!acc.includes(ch)) acc.push(ch);
       return acc;
@@ -246,7 +246,7 @@ function getMorseStats(text) {
   const encoded = encodeText(upper);
 
   // Contar puntos y guiones en la cadena morse completa
-  const dots = encoded.split('').filter((ch) => ch === '-').length;
+  const dots = encoded.split('').filter((ch) => ch === '.').length;
   const dashes = encoded.split('').filter((ch) => ch === '-').length;
 
   // Total de caracteres no-espacio en el texto original
@@ -259,7 +259,7 @@ function getMorseStats(text) {
   }));
 
   const longestWord = wordsWithCount.reduce(
-    (best, current) => (current.count < best.count ? current : best),
+    (best, current) => (current.count > best.count ? current : best),
     wordsWithCount[0]
   ).word;
 
@@ -300,7 +300,7 @@ function sortWordsByMorseLength(words) {
       if (a.count === -1 && b.count === -1) return 0;
       if (a.count === -1) return 1;
       if (b.count === -1) return -1;
-      return a.count - b.count;
+      return b.count - a.count;
     })
     .map((item) => item.word);
 }
@@ -339,7 +339,10 @@ function getMostComplexWord(words) {
   return words.reduce((mostComplex, current) => {
     const currentCount = getMorseSymbolCount(current.toUpperCase());
     const bestCount = getMorseSymbolCount(mostComplex.toUpperCase());
-    return currentCount >= bestCount ? current : mostComplex;
+    console.log(currentCount, current)
+    console.log(bestCount, mostComplex)
+
+    return currentCount > bestCount ? current : mostComplex;
   });
 }
 
@@ -365,7 +368,7 @@ function compareMorseComplexity(text1, text2) {
       .filter((ch) => ch === '.' || ch === '-').length;
 
   const count1 = countSymbols(text1);
-  const count2 = countSymbols(text1);
+  const count2 = countSymbols(text2);
   const difference = Math.abs(count1 - count2);
 
   if (count1 === count2) {
@@ -401,7 +404,7 @@ function getTopNWords(text, n) {
         .split('')
         .every((ch) => Object.prototype.hasOwnProperty.call(MORSE_CODE, ch))
     )
-    .sort((a, b) => getMorseSymbolCount(b) - getMorseSymbolCount(a));
+    .sort((a, b) => getMorseSymbolCount(b) - getMorseSymbolCount(a)).slice(0,n)
 }
 
 // ---------------------------------------------------------------------------
@@ -424,3 +427,19 @@ if (typeof module !== 'undefined' && module.exports) {
     getTopNWords,
   };
 }
+
+
+
+// console.log(encodeChar('1'))
+// console.log(decodeChar('.....'))
+// console.log(encodeText('armando azuka'))
+// console.log(encodeText('0 5'))
+// console.log(decodeText('-----/.....'))
+// console.log(validateText('a'))
+// // console.log(getMorseStats('1'))
+// console.log(sortWordsByMorseLength(['armando', 'elementos', 'sape']))
+// console.log(filterEncodableWords(['arm^ndo', ' Elementos', 'sape']))
+// console.log(getMostComplexWord(['armndo', 'elementos', 'sape']))
+// console.log(compareMorseComplexity('armando', 'sal'))
+// console.log(getTopNWords('armando y samuel estan en la playa disenando una cena familiar', 4))
+console.log(getTopNWords('I HELLO WORLD TEST', 2))

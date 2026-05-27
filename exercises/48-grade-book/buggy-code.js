@@ -30,7 +30,7 @@ class GradeBook {
       return sum + grade * cat.weight;
     }, 0);
     // Divide entre el número de categorías en lugar de dejar el resultado directo
-    return total / this.categories.length;
+    return total 
   }
 
   getLetterGrade(student) {

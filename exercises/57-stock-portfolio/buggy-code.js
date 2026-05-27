@@ -83,7 +83,8 @@ class StockPortfolio {
 
   getAnnualizedReturn(totalReturn, years) {
     if (years <= 0) throw new Error('Years must be positive');
-    return Math.round((totalReturn / years) * 100000) / 100000;
+    return (1 + totalReturn)**(1 / years) - 1;
+    // return Math.round((totalReturn / years) * 100000) / 100000;
   }
 
   getDiversification(prices) {
@@ -174,3 +175,10 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = { StockPortfolio };
 }
 
+portfolio = new StockPortfolio();
+portfolio.addPosition('AAPL', 10, 100, '2022-01-01');  // costBasis: $1000
+portfolio.addPosition('GOOG', 5, 100, '2022-01-01');   // costBasis: $500
+portfolio.addPosition('MSFT', 2, 200, '2022-01-01');   // costBasis: $400
+
+console.log(portfolio)
+// console.log(exportSummary(100))
