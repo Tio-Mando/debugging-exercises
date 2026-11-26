@@ -124,6 +124,7 @@ class HabitTracker {
     const units = getCompletionUnits(habit.completions, habit.frequency);
     const unitSet = new Set(units);
 
+
     if (habit.frequency === 'daily') {
       const todayCompleted = unitSet.has(today);
       const msPerDay = 1000 * 60 * 60 * 24;
@@ -216,7 +217,7 @@ class HabitTracker {
 
     if (habit.frequency === 'daily') {
       const allDays = dateRange(startStr, endStr);
-      const totalDays = allDays.length - 1;
+      const totalDays = allDays.length;
       if (totalDays === 0) return 0;
       const completed = habit.completions.filter(d => d >= startStr && d <= endStr).length;
       return Math.round((completed / totalDays) * 10000) / 100;
